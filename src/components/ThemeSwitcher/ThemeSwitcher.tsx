@@ -24,7 +24,7 @@ const loadTheme = () => {
 const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className }) => {
   useMemo(() => loadTheme(), []);
 
-  const onSwitch = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onSwitch = () => {
     const theme = localStorage.getItem('theme');
     const newTheme = theme === 'dark' ? 'light' : 'dark';
 

@@ -6,10 +6,9 @@ import './Header.scss';
 
 type HeaderProps = {
   className?: string;
-  children?: React.ReactNode;
 };
 
-const Header: React.FC<HeaderProps> = ({ className, children }) => {
+const Header: React.FC<HeaderProps> = ({ className }) => {
   return (
     <div className={cn('__header-container', className)}>
       <ThemeSwitcher />
