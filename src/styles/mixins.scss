@@ -6,35 +6,42 @@
   align-items: center;
 }
 
-@mixin input {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid transparent;
-  transition: outline 0.2s ease-out;
-  background-color: getColor('background');
-  color: getColor('text-on-background');
-  outline: 0;
-
+@mixin buttonOrInput {
+  @include allCenter;
+  width: 75%;
+  height: 5rem;
+  margin: 2rem auto;
+  font-size: 2rem;
+  color: getColor('text-on-primary');
   border: 1px solid getColor('stroke');
+  background-color: transparent;
+  border-radius: 1rem;
+}
 
-  &:focus {
-    border-color: transparent;
-    outline: 1px solid getColor('secondary');
+@mixin buttonGoogle {
+  @include buttonOrInput;
+  justify-content: space-around;
+  cursor: pointer;
+  padding: 0 5rem;
+  font-size: 1.7rem;
+
+  img {
+    width: 4.5rem;
   }
 }
 
-@mixin label {
-  padding: 0.5rem 0;
-  font-size: 1.2rem;
-  font-weight: 500;
-  display: flex;
-  text-transform: uppercase;
-}
+@mixin buttonSubmit {
+  @include buttonOrInput;
+  background-color: getColor('primary');
+  color: getColor('text-on-secondary');
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 3rem auto;
 
-@mixin divPaper {
-  flex-direction: column;
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
+  &:hover {
+      transition: .2s;
+      filter: saturate(1.3);
+  }
 }
