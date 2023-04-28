@@ -1,0 +1,27 @@
+@import '../../styles/abstracts/colors';
+@import '../../styles/mixins';
+
+.__landing-page{
+    width: 100%;
+    height: 100%;
+    background: getColor('background');
+    display: block;
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    a {
+        background: getColor('primary');
+        color: getColor('text-on-primary');
+        text-decoration: none;
+        @include allCenter;
+        font-size: 1.7rem;
+        width: 20rem;
+        height: 5rem;
+        margin: 2rem;
+        border-radius: 1rem;
+    }
+}

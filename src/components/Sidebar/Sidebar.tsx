@@ -5,7 +5,7 @@ import cn from 'classnames';
 import './Sidebar.scss';
 
 const sidebarItems = [
-  { route: '/', label: 'Dashboard', icon: 'dashboard' },
+  { route: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
   { route: '/comercios', label: 'Comércios', icon: 'store' },
   { route: '/inquilinos', label: 'Inquilinos', icon: 'apartment' },
   { route: '/usuarios', label: 'Usuários', icon: 'group' }

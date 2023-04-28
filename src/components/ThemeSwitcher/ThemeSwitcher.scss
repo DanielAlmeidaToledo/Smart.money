@@ -4,7 +4,7 @@
   .__theme-switcher-button {
     user-select: none;
 
-    --size: 2rem;
+    --size: 2.5rem;
 
     @media (hover: none) {
       --size: 4.8rem;
@@ -36,7 +36,7 @@
       }
 
       & > :is(.moon, .sun) {
-        fill: getColor('text-on-primary');
+        fill: getColor('primary');
 
         .theme-toggle:is(:hover, :focus-visible) > & {
           filter: brightness(0.5);
@@ -44,7 +44,7 @@
       }
 
       & > .sun-beams {
-        stroke: getColor('text-on-primary');
+        stroke: getColor('primary');
         stroke-width: 2px;
 
         .theme-toggle:is(:hover, :focus-visible) & {

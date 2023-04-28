@@ -29,7 +29,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: getColor('text-on-secondary');
+      color: getColor('text-on-primary');
 
       span {
         transition: 0.3s;
@@ -58,7 +58,7 @@
       @include allCenter;
       justify-content: start;
       text-decoration: none;
-      color: getColor('text-on-secondary');
+      color: getColor('text-on-primary');
       padding: 2.5rem 0;
       transition: 0.1s;
       visibility: visible;
