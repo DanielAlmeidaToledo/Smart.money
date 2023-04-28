@@ -6,19 +6,22 @@ import './styles/_reset.scss';
 import './styles/main.scss';
 
 import App from './App';
+import LandingPage from './Pages/LandingPage/LandingPage';
 import Dashboard from './Pages/Dashboard/Dashboard';
-// import Signup from './Pages/Signup/Signup';
-// import ConfirmSignup from './Pages/ConfirmSignup/ConfirmSignup';
-// import Signin from './Pages/Signin/Signin';
+import Login from './Pages/Login/Login';
 
 const router = createBrowserRouter(
   [
+    {
+      path: '/',
+      element: <LandingPage />
+    },
     {
       path: '',
       element: <App />,
       children: [
         {
-          index: true,
+          path: '/dashboard',
           element: <Dashboard />
         },
         {
@@ -36,18 +39,10 @@ const router = createBrowserRouter(
       ],
       errorElement: <div>404</div>
     },
-    // {
-    //   path: '/registro',
-    //   element: <Signup />
-    // },
-    // {
-    //   path: '/confirmar-registro',
-    //   element: <ConfirmSignup />
-    // },
-    // {
-    //   path: '/login',
-    //   element: <Signin />
-    // }
+    {
+      path: '/login',
+      element: <Login />
+    },
   ],
   { basename: import.meta.env.VITE_BASENAME }
 );
