@@ -46,7 +46,7 @@ const Login: React.FC<LoginProps> = ({ className }) => {
                 </div>
                 <div className={cn('__login-form-input')}>
                   <label htmlFor="">Sua senha</label>
-                  <input type="text" />
+                  <input type="password" />
                   <p>Esqueci minha senha</p>
                 </div>
                 {/* Botão Enviar */}
