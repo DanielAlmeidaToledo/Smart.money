@@ -1,0 +1,35 @@
+* {
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+.__content-and-sidebar-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.__app-content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  overflow-y: auto;
+  padding: 0 6rem 6rem 6rem;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.div-btn-save {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 2rem;
+}

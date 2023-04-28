@@ -1,0 +1,119 @@
+@import '../../styles/abstracts/colors';
+
+.__theme-switcher-container {
+  .__theme-switcher-button {
+    user-select: none;
+
+    --size: 2rem;
+
+    @media (hover: none) {
+      --size: 4.8rem;
+    }
+
+    background: none;
+    border: none;
+    padding: 0;
+
+    inline-size: var(--size);
+    block-size: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: 5px;
+
+    & > svg {
+      inline-size: 100%;
+      block-size: 100%;
+      stroke-linecap: round;
+    }
+
+    .sun-and-moon {
+      & > :is(.moon, .sun, .sun-beams) {
+        transform-origin: center center;
+      }
+
+      & > :is(.moon, .sun) {
+        fill: getColor('text-on-primary');
+
+        .theme-toggle:is(:hover, :focus-visible) > & {
+          filter: brightness(0.5);
+        }
+      }
+
+      & > .sun-beams {
+        stroke: getColor('text-on-primary');
+        stroke-width: 2px;
+
+        .theme-toggle:is(:hover, :focus-visible) & {
+          filter: brightness(0.5);
+        }
+      }
+
+      & > .sun {
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      & > .sun-beams {
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+          opacity 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      [data-theme='dark'] & {
+        & > .sun {
+          transform: scale(1.75);
+        }
+
+        & > .sun-beams {
+          opacity: 0;
+        }
+
+        & > .moon > circle {
+          transform: translateX(-7px);
+
+          @supports (cx: 1) {
+            transform: translateX(0);
+            cx: 17;
+          }
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        & > .sun {
+          transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        & > .sun-beams {
+          transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+            opacity 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        [data-theme='dark'] & {
+          & > .sun {
+            transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition-duration: 0.25s;
+            transform: scale(1.75);
+          }
+
+          & > .sun-beams {
+            transform: rotataZ(-25deg);
+            transition-duration: 0.15s;
+          }
+
+          & > .moon > circle {
+            transition-delay: 0.25s;
+            transition-duration: 0.5s;
+          }
+        }
+
+        & > .moon > circle {
+          @supports (cx: 1) {
+            transition: cx 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          }
+        }
+      }
+    }
+  }
+}

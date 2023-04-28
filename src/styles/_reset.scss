@@ -1,0 +1,45 @@
+@import './abstracts/colors';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+:root {
+  @each $name, $value in $light-theme {
+    --color-#{$name}: #{$value};
+  }
+  --theme: light;
+}
+
+[data-theme='dark'] {
+  @each $name, $value in $dark-theme {
+    --color-#{$name}: #{$value};
+  }
+  --theme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  font-family: 'Roboto', sans-serif;
+  color: getColor('text-on-primary');
+  background-color: getColor('background');
+}

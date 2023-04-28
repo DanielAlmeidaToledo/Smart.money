@@ -1,0 +1,40 @@
+@import './abstracts/colors';
+
+@mixin allCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  transition: outline 0.2s ease-out;
+  background-color: getColor('background');
+  color: getColor('text-on-background');
+  outline: 0;
+
+  border: 1px solid getColor('stroke');
+
+  &:focus {
+    border-color: transparent;
+    outline: 1px solid getColor('secondary');
+  }
+}
+
+@mixin label {
+  padding: 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  display: flex;
+  text-transform: uppercase;
+}
+
+@mixin divPaper {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}

@@ -1,0 +1,23 @@
+$light-theme: (
+  'background': #F8F8F8,
+  'text-on-primary': #000000,
+  'text-on-secondary': #000000,
+  'primary': #1CA477,
+  'secondary': #5161f3,
+  'stroke': #9e9e9e,
+  'sidebar-background': #ffffff
+);
+
+$dark-theme: (
+  'background': #181818,
+  'text-on-primary': #ffffff,
+  'text-on-secondary': #ffffff,
+  'primary': #1CA477,
+  'secondary': #5161f3,
+  'stroke': #4c5059,
+  'sidebar-background': #121212
+);
+
+@function getColor($name) {
+  @return var(--color-#{$name});
+}
