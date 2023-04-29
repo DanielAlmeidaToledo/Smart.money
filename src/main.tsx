@@ -9,6 +9,7 @@ import App from './App';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Login from './Pages/Login/Login';
+import Register from './Pages/Register/Register';
 
 const router = createBrowserRouter(
   [
@@ -43,6 +44,10 @@ const router = createBrowserRouter(
       path: '/login',
       element: <Login />
     },
+    {
+      path: '/cadastro',
+      element: <Register />
+    }
   ],
   { basename: import.meta.env.VITE_BASENAME }
 );

@@ -1,27 +1,38 @@
 @import '../../styles/abstracts/colors';
-@import '../../styles/mixins';
+@import '../../styles/mixins/mixins';
 
 .__landing-page{
     width: 100%;
     height: 100%;
     background: getColor('background');
-    display: block;
+    @include allCenter;
+    flex-wrap: wrap;
 
-    div {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-    }
-
-    a {
-        background: getColor('primary');
-        color: getColor('text-on-primary');
-        text-decoration: none;
+    .__landing-page-header {
+        position: absolute;
+        inset: 0 0 0 0;
+        width: 100%;
+        height: 15vh;
+        padding-right: 5rem; 
         @include allCenter;
-        font-size: 1.7rem;
-        width: 20rem;
-        height: 5rem;
-        margin: 2rem;
-        border-radius: 1rem;
+        justify-content: flex-end;
     }
+
+    .__landing-page-title {
+        width: 100%;
+        @include allCenter;
+    }
+
+    .__landing-page-btn {
+        display: flex;
+
+        a {
+            @include buttonSubmit;
+            width: 20rem;
+            text-decoration: none;
+            margin: 0 3rem;
+        }
+    }
+
+
 }
