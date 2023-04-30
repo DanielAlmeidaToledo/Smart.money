@@ -11,74 +11,94 @@
   width: 9rem;
   transition: 0.2s;
 
+  .divLogo {
+    width: 8rem;
+    height: 5rem;
+    margin: 2rem auto 0;
+    @include allCenter;
+    align-items: flex-end;
+  }
+
+  img {
+    width: 85%;
+    transition: .2s;
+  }
+
   &.open {
     width: 28.5rem;
+
+    img {
+      width: 130%;
+    }
   }
 
   .material-symbols-outlined {
     font-size: 2.2rem;
-    margin: 0 3rem;
   }
 
   .btnSidebar {
-    @include allCenter;
+    @include allCenter; 
     justify-content: start;
-    height: 10rem;
+    margin-top: 4rem;
 
     button {
       background: none;
       border: none;
       cursor: pointer;
       color: getColor('text-on-primary');
+      margin: 0 auto;
 
-      span {
+      #iconHandle {
         transition: 0.3s;
         transform: scale(1.2);
-      }
 
-      span:hover {
-        transform: scale(1.5);
+        &:hover {
+          transform: scale(1.5);
+        }
       }
     }
   }
 
   .nav {
-    @include allCenter;
-    justify-content: flex-start;
-    flex-direction: column;
-    width: 100%;
 
     ul {
-      list-style: none;
       width: 100%;
     }
 
     .link {
       position: relative;
       @include allCenter;
-      justify-content: start;
+      justify-content: flex-start;
       text-decoration: none;
       color: getColor('text-on-primary');
-      padding: 2.5rem 0;
-      transition: 0.1s;
-      visibility: visible;
+      padding: 1.5rem 0;
+      width: 85%;
+      margin: 3rem auto;
+      transition: 0.2s;
+      border-radius: 20rem;
+      border: 1px solid transparent;
 
       &:hover:not(.active) {
-        color: getColor('secondary');
+        color: getColor('primary');
+        border: 1px solid getColor('primary');
       }
 
       &.active {
-        background: getColor('secondary');
+        background: getColor('primary');
+      }
+
+      .material-symbols-outlined {
+        width: 8rem;
+        @include allCenter;
       }
 
       p {
-        left: 0;
-        position: absolute;
-        visibility: hidden;
+        display: none;
 
         &.open {
+          position: absolute;
           left: 8.5rem;
-          visibility: visible;
+          display: block;
           animation: reveal 1s;
         }
 
@@ -93,4 +113,5 @@
       }
     }
   }
+
 }

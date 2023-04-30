@@ -52,7 +52,7 @@ const Login: React.FC<LoginProps> = ({ className }) => {
               <p>Esqueci minha senha</p>
             </div>
             {/* Botão Enviar */}
-            <a href="/dashboard" className={cn('__login-form-button')}>
+            <a href="/inicio" className={cn('__login-form-button')}>
               Entrar
             </a>
           </form>

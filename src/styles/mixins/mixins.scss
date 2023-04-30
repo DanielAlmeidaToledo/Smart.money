@@ -9,7 +9,7 @@
 @mixin buttonOrInput {
   @include allCenter;
   width: 75%;
-  height: 5rem;
+  height: 4.5rem;
   margin: 2rem auto;
   font-size: 1.7rem;
   color: getColor('text-on-primary');
