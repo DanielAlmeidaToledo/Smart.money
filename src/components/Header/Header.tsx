@@ -9,14 +9,18 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ className }) => {
+  function handleButton(){
+    alert("Em desenvolvimento");
+  }
   return (
     <div className={cn('__header-container', className)}>
       <ThemeSwitcher />
-      <span className="material-symbols-outlined">notifications_active</span>
-      <div className="__header-user">
-        <div className="__header-iconUser"></div>
-        <p>User</p>
-      </div>
+      <button onClick={() => handleButton()}>
+        <span className="material-symbols-outlined">settings</span>
+      </button>
+      <button onClick={() => handleButton()}>
+        <span className="material-symbols-outlined">account_circle</span>
+      </button>
     </div>
   );
 };
