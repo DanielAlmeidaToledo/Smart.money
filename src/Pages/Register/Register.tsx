@@ -56,7 +56,7 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
               <input type="password" />
             </div>
             {/* Botão Enviar */}
-            <a href="/dashboard" className={cn('__register-form-button')}>
+            <a href="/inicio" className={cn('__register-form-button')}>
               Começar a usar
             </a>
           </form>

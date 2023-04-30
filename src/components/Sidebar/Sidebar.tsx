@@ -1,14 +1,16 @@
 import { Link, useLocation, matchPath } from 'react-router-dom';
 import { useState } from 'react';
 import cn from 'classnames';
+import Logo from '../../assets/logo/logo-verde-esc.svg'
 
 import './Sidebar.scss';
 
 const sidebarItems = [
-  { route: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
-  { route: '/comercios', label: 'Comércios', icon: 'store' },
-  { route: '/inquilinos', label: 'Inquilinos', icon: 'apartment' },
-  { route: '/usuarios', label: 'Usuários', icon: 'group' }
+  { route: '/inicio', label: 'Início', icon: 'home' },
+  { route: '/extrato', label: 'Extrato', icon: 'receipt_long' },
+  { route: '/cartoes', label: 'Cartões', icon: 'style' },
+  { route: '/metas', label: 'Metas', icon: 'track_changes' },
+  { route: '/ajustes', label: 'Ajustes', icon: 'settings' }
 ];
 
 type SidebarProps = {
@@ -25,9 +27,12 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 
   return (
     <div className={cn('__sidebar-container', className, { open })}>
+      <div className="divLogo">
+        <img src={Logo} alt="Logo Smart.money" />
+      </div>
       <div className="btnSidebar">
         <button onClick={() => toggleOpen()}>
-          <span className="material-symbols-outlined">
+          <span className="material-symbols-outlined" id="iconHandle">
             {open ? 'navigate_before' : 'navigate_next'}
           </span>
         </button>
