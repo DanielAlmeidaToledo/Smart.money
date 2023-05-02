@@ -1,0 +1,24 @@
+@import '../../styles/abstracts/colors';
+@import '../../styles/mixins/mixins';
+@import '../../styles/mixins/breakpoints';
+
+.__home-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .__home-geral, .__home-transaction {
+    width: 100%;
+    height: 50%;
+    @include allCenter;
+    justify-content: space-evenly;
+  }
+
+  // .__home-geral {
+  //   border: 1px solid blue;
+  // }
+
+  // .__home-transaction {
+  //   border: 1px solid white;
+  // }
+}
