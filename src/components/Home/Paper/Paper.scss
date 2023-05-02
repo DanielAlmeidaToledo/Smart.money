@@ -1,0 +1,14 @@
+@import '../../../styles/abstracts/colors';
+@import '../../../styles/mixins/mixins';
+@import '../../../styles/mixins/breakpoints';
+
+.__paper-container {
+    width: 30%;
+    height: 80%;
+    background-color: getColor('sidebar-background');
+    border-radius: 2rem;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

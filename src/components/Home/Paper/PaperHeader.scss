@@ -1,0 +1,19 @@
+@import '../../../styles/abstracts/colors';
+@import '../../../styles/mixins/mixins';
+@import '../../../styles/mixins/breakpoints';
+
+.__paper-header {
+    @include allCenter;
+    justify-content: space-between;
+    font-size: 1rem;
+
+    button, a {
+        cursor: pointer;
+        text-decoration: none;
+
+        span {
+            font-size: 2.5rem;
+            color: getColor('text-on-primary');
+        }
+    }
+}
