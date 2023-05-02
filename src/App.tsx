@@ -8,9 +8,10 @@ import './styles/main.scss';
 import { Outlet } from 'react-router-dom';
 
 // Posteriormente vai ser substituido por uma chamada a API
-const UserValue = {
+const User = {
   name: 'Daniel Toledo',
   email: 'danieltoledo.dev@gmail.com',
+  balance: 3297.98,
   transactions: [
     {
       id: 1,
@@ -66,8 +67,8 @@ const UserValue = {
       id: 1,
       title: 'Viagem para o Caribe',
       type: 'viagem',
-      amount: 12000,
-      balance: 1000
+      amount: 20000,
+      balance: 14600
     },
     {
       id: 2,
@@ -81,7 +82,7 @@ const UserValue = {
 
 function App() {
   return (
-    <UserContext.Provider value={UserValue}>
+    <UserContext.Provider value={User}>
       <div className="__content-and-sidebar-wrapper">
         <Sidebar />
         <div className="__app-content">
