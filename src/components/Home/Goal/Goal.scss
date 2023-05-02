@@ -1,0 +1,15 @@
+@import '../../../styles/abstracts/colors';
+@import '../../../styles/mixins/mixins';
+@import '../../../styles/mixins/breakpoints';
+
+.__goal-content {
+    height: 75%;
+    @include allCenter;
+
+    .__goal-chart {
+        width: 16rem;
+        height: 16rem;
+        border-radius: 100rem;
+        background-color: getColor('primary');
+    }
+}
