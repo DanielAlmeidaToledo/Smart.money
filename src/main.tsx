@@ -7,7 +7,7 @@ import './styles/main.scss';
 
 import App from './App';
 import LandingPage from './Pages/LandingPage/LandingPage';
-import Dashboard from './Pages/Dashboard/Dashboard';
+import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 
@@ -23,23 +23,23 @@ const router = createBrowserRouter(
       children: [
         {
           path: '/inicio',
-          element: <Dashboard />
+          element: <Home />
         },
         {
           path: '/extrato',
-          element: <Dashboard />
+          element: <Home />
         },
         {
           path: '/cartoes',
-          element: <Dashboard />
+          element: <Home />
         },
         {
           path: '/metas',
-          element: <Dashboard />
+          element: <Home />
         },
         {
           path: '/ajustes',
-          element: <Dashboard />
+          element: <Home />
         }
       ],
       errorElement: <div>404</div>
