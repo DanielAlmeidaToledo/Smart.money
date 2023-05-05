@@ -11,4 +11,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: getColor('box-shadow');
+}
+
+.__paper-container-full {
+    width: 95%;
+    height: 100%;
 }
