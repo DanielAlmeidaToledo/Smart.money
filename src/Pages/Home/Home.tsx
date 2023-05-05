@@ -9,6 +9,7 @@ import UserContext from '../../contexts/UserContext';
 import { UserProps } from '../../contexts/Props';
 import Cards from '../../components/Home/Cards/Cards';
 import Goal from '../../components/Home/Goal/Goal';
+import Transactions from '../../components/Home/Transactions/Transactions';
 
 type HomeProps = {
   className?: string;
@@ -24,7 +25,9 @@ const Home: React.FC<HomeProps> = ({ className }) => {
         <Cards />
         <Goal goal={User.goals[0]} />
       </div>
-      <div className={cn('__home-transaction')}></div>
+      <div className={cn('__home-transaction')}>
+        <Transactions />
+      </div>
     </div>
   );
 };

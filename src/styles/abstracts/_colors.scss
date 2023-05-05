@@ -5,7 +5,8 @@ $light-theme: (
   'primary': #1CA477,
   'secondary': #5161f3,
   'stroke': #B5B5B5,
-  'sidebar-background': #ffffff
+  'sidebar-background': #ffffff,
+  'box-shadow': 0px 0px 10px rgba(0, 0, 0, 0.1)
 );
 
 $dark-theme: (
@@ -15,7 +16,8 @@ $dark-theme: (
   'primary': #1CA477,
   'secondary': #5161f3,
   'stroke': #B5B5B5,
-  'sidebar-background': #121212
+  'sidebar-background': #121212,
+  'box-shadow': 0px 0px 10px rgba(30, 30, 30, 0.25)
 );
 
 @function getColor($name) {
