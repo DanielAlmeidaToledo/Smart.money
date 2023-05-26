@@ -1,38 +1,47 @@
 @import '../../styles/abstracts/colors';
 @import '../../styles/mixins/mixins';
+@import '../../styles/mixins/breakpoints';
 
 .__landing-page{
     width: 100%;
     height: 100%;
     background: getColor('background');
-    @include allCenter;
-    flex-wrap: wrap;
 
     .__landing-page-header {
-        position: absolute;
-        inset: 0 0 0 0;
-        width: 100%;
-        height: 15vh;
-        padding-right: 5rem; 
-        @include allCenter;
-        justify-content: flex-end;
-    }
+        height: 15h;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 2rem 12rem 0;
 
-    .__landing-page-title {
-        width: 100%;
-        @include allCenter;
+        img {
+            width: 18rem;
+            height: auto;
+
+            @include md {
+                width: 15rem;
+                height: 15rem;
+            }
+        }
+
+        @include md {
+            padding: 0 5rem;
+            border: 1px solid red;
+        }
     }
 
     .__landing-page-btn {
-        display: flex;
+        @include allCenter;
+        justify-content: space-between;
+
+        :nth-child(n+1) {
+            margin: 0 1rem;
+        }
 
         a {
             @include buttonSubmit;
             width: 20rem;
             text-decoration: none;
-            margin: 0 3rem;
         }
     }
-
-
 }
