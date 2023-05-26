@@ -12,14 +12,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ className }) => {
   return (
     <div className={cn('__landing-page', className)}>
       <div className={cn('__landing-page-header')}>
-        <ThemeSwitcher />
-      </div>{' '}
-      <div className={cn('__landing-page-title')}>
         <img src={Logo} alt="Logo" />
-      </div>
-      <div className={cn('__landing-page-btn')}>
-        <a href="/login">Entrar</a>
-        <a href="/cadastro">Registrar-se</a>
+        <div className={cn('__landing-page-btn')}>
+          <a href="/login">Entrar</a>
+          <ThemeSwitcher />
+        </div>
       </div>
     </div>
   );
