@@ -18,7 +18,18 @@ const Cards: React.FC<CardsProps> = ({ className }) => {
           <span className="material-symbols-outlined">add</span>
         </button>
       </PaperHeader>
-      <div className={cn('__cards-content', className)}>Cartões</div>
+      <div className={cn('__cards-content', className)}>
+        <div className={cn('__cards-total')}>
+          <div className={cn('__cards-header')}>
+            <span>CreditCard</span>
+            <span>Smart.money</span>
+          </div>
+          <div className={cn('__cards-info')}>
+            <p>XXXX XXXX XXXX XXXX</p>
+            <span>Smart.money</span>
+          </div>
+        </div>
+      </div>
     </Paper>
   );
 };

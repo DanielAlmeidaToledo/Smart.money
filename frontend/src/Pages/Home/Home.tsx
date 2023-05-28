@@ -16,17 +16,17 @@ type HomeProps = {
 };
 
 const Home: React.FC<HomeProps> = ({ className }) => {
-  const User = useContext(UserContext) as UserProps;
+  const user = useContext(UserContext) as UserProps;
 
   return (
     <div className={cn('__home-container', className)}>
       <div className={cn('__home-geral')}>
-        <OverallBalance balance={User.balance} />
+        <OverallBalance balance={user.balance} />
         <Cards />
-        <Goal goal={User.goals[0]} />
+        <Goal goal={user.goals[0]} />
       </div>
       <div className={cn('__home-transaction')}>
-        <Transactions />
+        <Transactions transactions={user.transactions} />
       </div>
     </div>
   );

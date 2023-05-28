@@ -3,5 +3,9 @@
 @import '../../../styles/mixins/breakpoints';
 
 .__transactions-content {
-    height: 75%;
+    height: 100%;
+
+    .ReactApexChart {
+        color: #000;
+    }
 }
