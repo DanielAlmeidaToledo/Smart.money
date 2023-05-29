@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import cn from 'classnames';
 
 import './Statement.scss';
@@ -26,42 +25,42 @@ const categories = [
   { id: 9, name: 'outros', icon: FoodIcon, color: '#71199A' }
 ];
 
-const Statement: React.FC<StatementProps> = ({ className }) => {
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      title: 'Almoço - Restaurante',
-      type: 'gasto',
-      category: 'comida',
-      amount: 350,
-      date: new Date('2023-01-05 12:00:00')
-    },
-    {
-      id: 2,
-      title: 'Salário',
-      type: 'receita',
-      category: 'salario',
-      amount: 1500.0,
-      date: new Date('2023-05-05 17:00:00')
-    },
-    {
-      id: 3,
-      title: 'Compras no shopping',
-      type: 'gasto',
-      category: 'roupas',
-      amount: 589.9,
-      date: new Date('2023-07-05 14:00:00')
-    },
-    {
-      id: 4,
-      title: 'Posto de combustível',
-      type: 'gasto',
-      category: 'carro',
-      amount: 940.0,
-      date: new Date('2023-10-05 07:40:00')
-    }
-  ]);
+const transactions = [
+  {
+    id: 1,
+    title: 'Almoço - Restaurante',
+    type: 'gasto',
+    category: 'comida',
+    amount: 350,
+    date: new Date('2023-01-05 12:00:00')
+  },
+  {
+    id: 2,
+    title: 'Salário',
+    type: 'receita',
+    category: 'salario',
+    amount: 1500.0,
+    date: new Date('2023-05-05 17:00:00')
+  },
+  {
+    id: 3,
+    title: 'Compras no shopping',
+    type: 'gasto',
+    category: 'roupas',
+    amount: 589.9,
+    date: new Date('2023-07-05 14:00:00')
+  },
+  {
+    id: 4,
+    title: 'Posto de combustível',
+    type: 'gasto',
+    category: 'carro',
+    amount: 940.0,
+    date: new Date('2023-10-05 07:40:00')
+  }
+];
 
+const Statement: React.FC<StatementProps> = ({ className }) => {
   return (
     <div className={cn('__statement-container', className)}>
       <h2>Extrato</h2>
