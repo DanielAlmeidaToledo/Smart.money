@@ -8,6 +8,7 @@ import './styles/main.scss';
 import App from './App';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import Home from './Pages/Home/Home';
+import Statement from './Pages/Statement/Statement';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 
@@ -27,19 +28,19 @@ const router = createBrowserRouter(
         },
         {
           path: '/extrato',
-          element: <Home />
+          element: <Statement />
         },
         {
           path: '/cartoes',
-          element: <Home />
+          element: <Statement />
         },
         {
           path: '/metas',
-          element: <Home />
+          element: <Statement />
         },
         {
           path: '/ajustes',
-          element: <Home />
+          element: <Statement />
         }
       ],
       errorElement: <div>404</div>
