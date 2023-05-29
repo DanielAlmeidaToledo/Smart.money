@@ -9,6 +9,8 @@ import App from './App';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import Home from './Pages/Home/Home';
 import Statement from './Pages/Statement/Statement';
+import Goals from './Pages/Goals/Goals';
+import CardsList from './Pages/CardsList/CardsList';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 
@@ -32,15 +34,15 @@ const router = createBrowserRouter(
         },
         {
           path: '/cartoes',
-          element: <Statement />
+          element: <CardsList />
         },
         {
           path: '/metas',
-          element: <Statement />
+          element: <Goals />
         },
         {
           path: '/ajustes',
-          element: <Statement />
+          element: <CardsList />
         }
       ],
       errorElement: <div>404</div>

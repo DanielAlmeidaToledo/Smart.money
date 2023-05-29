@@ -8,7 +8,7 @@ import OverallBalance from '../../components/Home/OverallBalance/OverallBalance'
 import UserContext from '../../contexts/UserContext';
 import { UserProps } from '../../contexts/Props';
 import Cards from '../../components/Home/Cards/Cards';
-import Goal from '../../components/Home/Goal/Goal';
+import Goal from '../../components/Home/GoalCard/GoalCard';
 import Transactions from '../../components/Home/Transactions/Transactions';
 
 type HomeProps = {
