@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
 
 import './styles/_reset.scss';
 import './styles/main.scss';
@@ -61,6 +62,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+    {/* <AuthProvider> */}
     <RouterProvider router={router} />
+    {/* </AuthProvider> */}
   </React.StrictMode>
 );

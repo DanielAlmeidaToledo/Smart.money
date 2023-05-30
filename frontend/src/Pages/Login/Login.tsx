@@ -1,8 +1,10 @@
 import cn from 'classnames';
+import { useState } from 'react';
+import useAuthContext from '../../contexts/AuthContext';
 
-import './Login.scss'
-import Logo from '../../assets/logo/logo-verde-esc.svg'
-import GoogleIcon from '../../assets/icons/icon-google.svg'
+import './Login.scss';
+import Logo from '../../assets/logo/logo-verde-esc.svg';
+import GoogleIcon from '../../assets/icons/icon-google.svg';
 
 import ThemeSwitcher from '../../components/ThemeSwitcher/ThemeSwitcher';
 
@@ -11,50 +13,55 @@ type LoginProps = {
 };
 
 const Login: React.FC<LoginProps> = ({ className }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login, errors } = useAuthContext();
+
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    login({ email, password });
+  };
+
   return (
     <div className={cn('__login-container', className)}>
-      {/* Header */}
       <div className={cn('__login-header')}>
         <ThemeSwitcher />
       </div>
-      {/* Content */}
       <div className={cn('__login-content')}>
-        {/* Logo e Texto */}
         <div className={cn('__login-logo')}>
           <img src={Logo} alt="Logo da Smart.money" />
           <h3>
             Controle suas finanças com eficiência através da <span>Smart.money</span>
           </h3>
         </div>
-        {/* Formulário*/}
         <div className={cn('__login-form')}>
           <form action="">
             <p className={cn('__login-form-title')}>Acesse sua conta</p>
-            {/* Botão Google */}
             <button className={cn('__login-form-google')}>
               <img src={GoogleIcon} alt="Logo do Google" />
               Entre com o Google
             </button>
-            {/* Ou */}
             <div className={cn('__login-form-or')}>
               <hr />
               <span>ou</span>
               <hr />
             </div>
-            {/* Inputs */}
             <div className={cn('__login-form-input')}>
               <label htmlFor="">Seu e-mail</label>
-              <input type="text" />
+              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className={cn('__login-form-input')}>
               <label htmlFor="">Sua senha</label>
-              <input type="password" />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <p>Esqueci minha senha</p>
             </div>
-            {/* Botão Enviar */}
-            <a href="/inicio" className={cn('__login-form-button')}>
+            <button className={cn('__login-form-button')} onClick={handleLogin}>
               Entrar
-            </a>
+            </button>
           </form>
           <p className={cn('__login-cadastro')}>
             Ainda não possui conta? <a href="/cadastro">Faça o cadastro!</a>
