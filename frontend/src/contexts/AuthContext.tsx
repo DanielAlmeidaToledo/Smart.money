@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     try {
       await axios.post('/login', data);
       getUser();
-      redirect('/inicio');
+      redirect('/123');
     } catch (e: any) {
       if (e.response.status === 422) {
         setErros(e.response.data.errors);

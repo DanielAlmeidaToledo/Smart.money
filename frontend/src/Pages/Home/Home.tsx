@@ -77,6 +77,7 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   useEffect(() => {
     if (!user) {
       getUser();
+      console.log('--->', user);
     }
   }, []);
 

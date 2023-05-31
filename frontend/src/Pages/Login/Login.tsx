@@ -1,11 +1,12 @@
 import cn from 'classnames';
 import { useState } from 'react';
 import useAuthContext from '../../contexts/AuthContext';
+import axios from '../../api/axios';
 
 import './Login.scss';
+
 import Logo from '../../assets/logo/logo-verde-esc.svg';
 import GoogleIcon from '../../assets/icons/icon-google.svg';
-
 import ThemeSwitcher from '../../components/ThemeSwitcher/ThemeSwitcher';
 
 type LoginProps = {
@@ -15,11 +16,20 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ className }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, errors } = useAuthContext();
+  // const { login, errors } = useAuthContext();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    login({ email, password });
+
+    // login({ email, password });
+
+    try {
+      await axios.post('/login', { email, password });
+      setEmail('');
+      setPassword('');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -35,7 +45,7 @@ const Login: React.FC<LoginProps> = ({ className }) => {
           </h3>
         </div>
         <div className={cn('__login-form')}>
-          <form action="">
+          <form onSubmit={handleLogin}>
             <p className={cn('__login-form-title')}>Acesse sua conta</p>
             <button className={cn('__login-form-google')}>
               <img src={GoogleIcon} alt="Logo do Google" />
@@ -47,19 +57,27 @@ const Login: React.FC<LoginProps> = ({ className }) => {
               <hr />
             </div>
             <div className={cn('__login-form-input')}>
-              <label htmlFor="">Seu e-mail</label>
-              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <label>Seu e-mail</label>
+              <input
+                type="text"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className={cn('__login-form-input')}>
-              <label htmlFor="">Sua senha</label>
+              <label>Sua senha</label>
               <input
                 type="password"
+                name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <p>Esqueci minha senha</p>
             </div>
-            <button className={cn('__login-form-button')} onClick={handleLogin}>
+            <button className={cn('__login-form-button')} type="submit">
               Entrar
             </button>
           </form>
