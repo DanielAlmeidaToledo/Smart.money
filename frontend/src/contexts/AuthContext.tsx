@@ -1,13 +1,24 @@
 import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
-const AuthContext = createContext({});
+type AuthProps = {
+  children: React.ReactNode;
+};
 
-export const AuthProvider = ({ children }: any) => {
+type AuthContextType = {
+  user: any;
+  errors: any[];
+  getUser: () => Promise<void>;
+  login: (data: any) => Promise<void>;
+  register: (data: any) => Promise<void>;
+};
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: AuthProps) => {
   const [user, setUser] = useState(null);
-  const [errors, setErros] = useState([]);
-  const navigate = useNavigate();
+  const [errors, setErros] = useState<any[]>([]);
 
   const csrf = () => axios.get('/sanctum/csrf-cookie');
 
@@ -21,7 +32,7 @@ export const AuthProvider = ({ children }: any) => {
     try {
       await axios.post('/login', data);
       getUser();
-      navigate('/');
+      redirect('/inicio');
     } catch (e: any) {
       if (e.response.status === 422) {
         setErros(e.response.data.errors);
@@ -34,7 +45,7 @@ export const AuthProvider = ({ children }: any) => {
     try {
       await axios.post('/register', data);
       getUser();
-      navigate('/');
+      redirect('/opa');
     } catch (e: any) {
       if (e.response.status === 422) {
         setErros(e.response.data.errors);
@@ -49,6 +60,10 @@ export const AuthProvider = ({ children }: any) => {
   );
 };
 
-export default function useAuthContext() {
-  return useContext(AuthContext);
+export default function useAuthContext(): AuthContextType {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuthContext must be used within an AuthProvider');
+  }
+  return context;
 }
