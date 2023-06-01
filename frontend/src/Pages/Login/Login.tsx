@@ -1,7 +1,8 @@
 import cn from 'classnames';
 import { useState } from 'react';
-import useAuthContext from '../../contexts/AuthContext';
+// import useAuthContext from '../../contexts/AuthContext';
 import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 import './Login.scss';
 
@@ -16,6 +17,7 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ className }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   // const { login, errors } = useAuthContext();
 
   const handleLogin = async (e: any) => {
@@ -27,6 +29,7 @@ const Login: React.FC<LoginProps> = ({ className }) => {
       await axios.post('/login', { email, password });
       setEmail('');
       setPassword('');
+      navigate('/inicio');
     } catch (error) {
       console.log(error);
     }
