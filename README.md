@@ -1,16 +1,21 @@
 # Smart.money
 
-## ⚙️ Front-end:
+<p align="center">
+  <img src="https://github.com/DanielAlmeidaToledo/Smart.money/assets/96501443/a8cce6c7-4637-4e48-b9cd-a54ef62dd3f9" alt="Smart.money width="180" height="180"/>
+</p>
+
+## Front-end:
 
 - React.JS
 - Typescript
 - Sass
 - Vite
 
-## ⚙️ Back-end:
+## Back-end:
 
 - Laravel
+- Breeze (Laravel)
 
-## ⚙️ Banco de Dados:
+## Banco de Dados:
 
 - MySQL
