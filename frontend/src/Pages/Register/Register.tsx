@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import { useState } from 'react';
-import useAuthContext from '../../contexts/AuthContext';
+// import useAuthContext from '../../contexts/AuthContext';
+import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 import './Register.scss';
 
@@ -16,11 +18,22 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { register, errors } = useAuthContext();
+  const navigate = useNavigate();
+  // const { register, errors } = useAuthContext();
 
   const handleRegister = async (e: any) => {
     e.preventDefault();
-    register({ name, email, password });
+    // register({ name, email, password });
+
+    try {
+      await axios.post('/register', { name, email, password });
+      setName('');
+      setEmail('');
+      setPassword('');
+      navigate("/inicio");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -36,7 +49,7 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
           </h3>
         </div>
         <div className={cn('__register-form')}>
-          <form>
+          <form onSubmit={handleRegister}>
             <p className={cn('__register-form-title')}>Crie sua conta como quiser</p>
             <p className={cn('__register-form-subtitle')}>Comece já a organizar sua grana</p>
             <button className={cn('__register-form-google')}>
@@ -78,9 +91,7 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
                 required
               />
             </div>
-            <button className={cn('__register-form-button')} onClick={handleRegister}>
-              Começar a usar
-            </button>
+            <button className={cn('__register-form-button')}>Começar a usar</button>
           </form>
           <p className={cn('__register-cadastro')}>
             Já sou cadastrado. <a href="/login">Quero fazer login!</a>
