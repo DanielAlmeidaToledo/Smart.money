@@ -19,6 +19,7 @@
         .__statement-search {
             height: 12%;
             display: flex;
+            justify-content: space-between;
 
             div {
                 @include allCenter;
@@ -34,6 +35,20 @@
                     color: white;
                     background-color: getColor('background');
                 }
+            }
+
+            .button-add-transaction {
+                @include buttonOrInput;
+                border: 1px solid getColor('primary');
+                background-color: getColor('primary');
+                cursor: pointer;
+                width: 16rem;
+                margin: auto 6rem auto 0;
+
+                &:hover {
+                    transition: .2s;
+                    box-shadow: 0px 0px 10px getColor('primary');
+                }            
             }
         }
 

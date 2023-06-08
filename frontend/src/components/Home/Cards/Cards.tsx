@@ -14,9 +14,9 @@ const Cards: React.FC<CardsProps> = ({ className }) => {
     <Paper>
       <PaperHeader>
         <h1>Cartões</h1>
-        <button>
-          <span className="material-symbols-outlined">add</span>
-        </button>
+        <a href="/cartoes">
+          <span className="material-symbols-outlined">query_stats</span>
+        </a>
       </PaperHeader>
       <div className={cn('__cards-content', className)}>
         <div className={cn('__cards-total')}>
