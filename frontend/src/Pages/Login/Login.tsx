@@ -1,7 +1,6 @@
-import cn from 'classnames';
 import { useState } from 'react';
-// import useAuthContext from '../../contexts/AuthContext';
-import axios from '../../api/axios';
+import cn from 'classnames';
+import useAuthContext from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 import './Login.scss';
@@ -17,21 +16,15 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ className }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login, errors } = useAuthContext();
   const navigate = useNavigate();
-  // const { login, errors } = useAuthContext();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-
-    // login({ email, password });
-
-    try {
-      await axios.post('/login', { email, password });
-      setEmail('');
-      setPassword('');
+    login({ email, password });
+    if (!errors) {
       navigate('/inicio');
-    } catch (error) {
-      console.log(error);
+      console.log('Login efetuado com sucesso!');
     }
   };
 

@@ -1,5 +1,5 @@
-import cn from 'classnames';
 import { useEffect } from 'react';
+import cn from 'classnames';
 import useAuthContext from '../../contexts/AuthContext';
 
 import './Home.scss';
@@ -77,8 +77,8 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   useEffect(() => {
     if (!user) {
       getUser();
-      console.log('--->', user);
     }
+    console.log('--->', user);
   }, []);
 
   return (

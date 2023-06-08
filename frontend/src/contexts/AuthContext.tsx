@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import axios from 'axios';
-import { redirect } from 'react-router-dom';
+import axios from './../api/axios';
 
 type AuthProps = {
   children: React.ReactNode;
@@ -28,11 +27,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
   };
 
   const login = async ({ ...data }) => {
+    console.log(data);
     await csrf();
     try {
       await axios.post('/login', data);
       getUser();
-      redirect('/123');
     } catch (e: any) {
       if (e.response.status === 422) {
         setErros(e.response.data.errors);
@@ -45,7 +44,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
     try {
       await axios.post('/register', data);
       getUser();
-      redirect('/opa');
     } catch (e: any) {
       if (e.response.status === 422) {
         setErros(e.response.data.errors);

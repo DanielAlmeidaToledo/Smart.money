@@ -1,7 +1,6 @@
-import cn from 'classnames';
 import { useState } from 'react';
-// import useAuthContext from '../../contexts/AuthContext';
-import axios from '../../api/axios';
+import cn from 'classnames';
+import useAuthContext from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 import './Register.scss';
@@ -18,21 +17,14 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { register, errors } = useAuthContext();
   const navigate = useNavigate();
-  // const { register, errors } = useAuthContext();
 
   const handleRegister = async (e: any) => {
     e.preventDefault();
-    // register({ name, email, password });
-
-    try {
-      await axios.post('/register', { name, email, password });
-      setName('');
-      setEmail('');
-      setPassword('');
-      navigate("/inicio");
-    } catch (error) {
-      console.log(error);
+    register({ name, email, password });
+    if (!errors) {
+      navigate('/inicio');
     }
   };
 

@@ -64,9 +64,9 @@ const Transactions: React.FC<TransactionsProps> = ({ className, transactions }) 
     <Paper className="__paper-container-full">
       <PaperHeader>
         <h1>Transações</h1>
-        <button>
-          <span className="material-symbols-outlined">add</span>
-        </button>
+        <a href="/extrato">
+          <span className="material-symbols-outlined">query_stats</span>
+        </a>
       </PaperHeader>
       <div className={cn('__transactions-content', className)}>
         <ReactApexChart

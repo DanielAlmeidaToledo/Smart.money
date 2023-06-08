@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { useState } from 'react';
 
 import './Statement.scss';
 
@@ -12,6 +13,8 @@ import FoodIcon from '../../assets/icons/food-icon.svg';
 import SalaryIcon from '../../assets/icons/salary-icon.svg';
 import ClothesIcon from '../../assets/icons/clothing-icon.svg';
 import CarIcon from '../../assets/icons/car-icon.svg';
+
+import TransactionModal from '../../components/Statement/TransactionModal/TransactionModal';
 
 const categories = [
   { id: 1, name: 'comida', icon: FoodIcon, color: '#71199A' },
@@ -61,25 +64,46 @@ const transactions = [
 ];
 
 const Statement: React.FC<StatementProps> = ({ className }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className={cn('__statement-container', className)}>
       <h2>Extrato</h2>
       <div className={cn('__statement-content')}>
         <div className={cn('__statement-search')}>
           <div>
-            <img src={SearchIcon} alt="Pesquisar" />
-            <input type="text" placeholder="Pesquisar" />
+            <div>
+              <img src={SearchIcon} alt="Pesquisar" />
+              <input type="text" placeholder="Pesquisar" />
+            </div>
+            <div>
+              <img src={CardIcon} alt="Filtrar" />
+              <select name="type" id="type">
+                <option value="all">Selecione</option>
+                <option value="inter">Inter</option>
+                <option value="nubank">Nubank</option>
+                <option value="itau">Itaú</option>
+                <option value="bradesco">Bradesco</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <img src={CardIcon} alt="Filtrar" />
-            <select name="type" id="type">
-              <option value="all">Selecione</option>
-              <option value="inter">Inter</option>
-              <option value="nubank">Nubank</option>
-              <option value="itau">Itaú</option>
-              <option value="bradesco">Bradesco</option>
-            </select>
-          </div>
+          <button className={cn(className, 'button-add-transaction', 'Button')} onClick={openModal}>
+            Adicionar
+          </button>
+          {isOpen && (
+            <TransactionModal
+              onClose={closeModal}
+              className={cn(className, '__transaction-modal')}
+            />
+          )}
         </div>
         <div className={cn('__statement-table')}>
           <table>
