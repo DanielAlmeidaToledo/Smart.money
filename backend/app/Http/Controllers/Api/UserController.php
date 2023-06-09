@@ -12,21 +12,28 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate();
+        $users = User::select('id', 'name', 'email', 'created_at')->get(10);
         return UserResource::collection($users);
     }
 
     public function showUser(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::select('id', 'name', 'email', 'created_at')
+            ->where('id', $id)
+            ->firstOrFail();
+
         return new UserResource($user);
     }
 
     public function register(RegisterUpdateUserRequest $request)
     {
-        $data = $request->validated();
-        $data['id'] = Uuid::uuid4()->toString();
-        $data['password'] = bcrypt($request->password);
+        $data = $request->all();
+        $data = [
+            'id' => Uuid::uuid4()->toString(),
+            'password' => bcrypt($request->password),
+            'name' => $request->name,
+            'email' => $request->email
+        ];
         $user = User::create($data);
 
         return new UserResource($user);
@@ -37,7 +44,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $data = $request->validated();
 
-        if ($request->has('password'))
+        if ($request->filled('password'))
             $data['password'] = bcrypt($request->password);
 
         $user->update($data);
