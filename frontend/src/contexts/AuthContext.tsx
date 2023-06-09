@@ -8,7 +8,7 @@ type AuthProps = {
 type AuthContextType = {
   user: any;
   errors: any[];
-  getUser: () => Promise<void>;
+  getUser: (userId: string) => Promise<void>;
   login: (data: any) => Promise<void>;
   register: (data: any) => Promise<void>;
 };
@@ -17,36 +17,35 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const [user, setUser] = useState(null);
-  const [errors, setErros] = useState<any[]>([]);
+  const [errors, setErrors] = useState<any[]>([]);
 
-  const csrf = () => axios.get('/sanctum/csrf-cookie');
-
-  const getUser = async () => {
-    const { data } = await axios.get('/api/user');
-    setUser(data);
+  const getUser = async (userId: string) => {
+    try {
+      const { data } = await axios.get(`/users/${userId}`);
+      setUser(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const login = async ({ ...data }) => {
-    console.log(data);
-    await csrf();
     try {
-      await axios.post('/login', data);
-      getUser();
+      await axios.post('/users', data);
+      // getUser();
     } catch (e: any) {
       if (e.response.status === 422) {
-        setErros(e.response.data.errors);
+        setErrors(e.response.data.errors);
       }
     }
   };
 
   const register = async ({ ...data }) => {
-    await csrf();
     try {
-      await axios.post('/register', data);
-      getUser();
+      const response = await axios.post('/users', data);
+      await getUser(response.data.id);
     } catch (e: any) {
-      if (e.response.status === 422) {
-        setErros(e.response.data.errors);
+      if (e.response && e.response.status === 422) {
+        setErrors(e.response.data.errors);
       }
     }
   };

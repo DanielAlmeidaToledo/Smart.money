@@ -75,10 +75,10 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   const { user, getUser } = useAuthContext();
 
   useEffect(() => {
-    if (!user) {
-      getUser();
-    }
-    console.log('--->', user);
+    // if (!user) {
+    //   getUser('2d8936f0-7ba2-4b30-b8ca-b1d96b4706cc');
+    // }
+    console.log(user);
   }, []);
 
   return (
