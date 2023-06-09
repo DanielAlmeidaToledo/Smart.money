@@ -22,8 +22,12 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
 
   const handleRegister = async (e: any) => {
     e.preventDefault();
-    register({ name, email, password });
-    if (!errors) {
+    await register({
+      name: name,
+      email: email,
+      password: password
+    });
+    if (errors.length === 0) {
       navigate('/inicio');
     }
   };
