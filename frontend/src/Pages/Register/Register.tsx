@@ -28,7 +28,7 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
       password: password
     });
     if (errors.length === 0) {
-      navigate('/inicio');
+      navigate('/login');
     }
   };
 
