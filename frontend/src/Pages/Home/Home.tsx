@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import cn from 'classnames';
-import useAuthContext from '../../contexts/AuthContext';
+// import { useEffect } from 'react';
+// import useAuthContext from '../../contexts/AuthContext';
 
 import './Home.scss';
 
@@ -72,14 +72,14 @@ const user2 = {
 };
 
 const Home: React.FC<HomeProps> = ({ className }) => {
-  const { user, getUser } = useAuthContext();
+  // const { user, getUser } = useAuthContext();
 
-  useEffect(() => {
-    // if (!user) {
-    //   getUser('2d8936f0-7ba2-4b30-b8ca-b1d96b4706cc');
-    // }
-    console.log(user);
-  }, []);
+  // useEffect(() => {
+  //   if (!user) {
+  //     getUser('2d8936f0-7ba2-4b30-b8ca-b1d96b4706cc');
+  //   }
+  //   console.log(user);
+  // }, []);
 
   return (
     <div className={cn('__home-container', className)}>

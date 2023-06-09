@@ -6,7 +6,7 @@ import Logo from '../../assets/logo/logo-verde-esc.svg'
 import './Sidebar.scss';
 
 const sidebarItems = [
-  { route: '/inicio', label: 'Início', icon: 'home' },
+  { route: '/dashboard', label: 'Início', icon: 'home' },
   { route: '/extrato', label: 'Extrato', icon: 'receipt_long' },
   { route: '/cartoes', label: 'Cartões', icon: 'style' },
   { route: '/metas', label: 'Metas', icon: 'track_changes' },

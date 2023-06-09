@@ -23,7 +23,7 @@ const Login: React.FC<LoginProps> = ({ className }) => {
     e.preventDefault();
     login({ email, password });
     if (!errors) {
-      navigate('/inicio');
+      navigate('/dashboard');
       console.log('Login efetuado com sucesso!');
     }
   };
