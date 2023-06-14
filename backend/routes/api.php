@@ -5,6 +5,10 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\TransactionController;
 
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
 # Rotas para o CRUD de usuários
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'showUser']);

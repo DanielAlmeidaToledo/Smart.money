@@ -25,3 +25,12 @@ export type UserProps = {
     balance: number;
   }[];
 };
+
+export type TransactionProps = {
+  id: number;
+  title: string;
+  type: string;
+  category: string;
+  amount: number;
+  date: Date;
+};
