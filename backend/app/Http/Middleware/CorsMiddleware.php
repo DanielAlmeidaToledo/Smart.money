@@ -12,7 +12,7 @@ class CorsMiddleware
 
         // Defina as configurações do CORS
         $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:5173');
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
         $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
         // Adicione as seguintes linhas para lidar com as solicitações OPTIONS
