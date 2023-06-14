@@ -3,10 +3,6 @@ import { useState } from 'react';
 
 import './Statement.scss';
 
-type StatementProps = {
-  className?: string;
-};
-
 import SearchIcon from '../../assets/icons/search-icon.svg';
 import CardIcon from '../../assets/icons/card-icon.svg';
 import FoodIcon from '../../assets/icons/food-icon.svg';
@@ -15,6 +11,11 @@ import ClothesIcon from '../../assets/icons/clothing-icon.svg';
 import CarIcon from '../../assets/icons/car-icon.svg';
 
 import TransactionModal from '../../components/Statement/TransactionModal/TransactionModal';
+import { useTransactions } from '../../components/useOutletContext/useOutletContext';
+
+type StatementProps = {
+  className?: string;
+};
 
 const categories = [
   { id: 1, name: 'comida', icon: FoodIcon, color: '#71199A' },
@@ -28,43 +29,10 @@ const categories = [
   { id: 9, name: 'outros', icon: FoodIcon, color: '#71199A' }
 ];
 
-const transactions = [
-  {
-    id: 1,
-    title: 'Almoço - Restaurante',
-    type: 'gasto',
-    category: 'comida',
-    amount: 350,
-    date: new Date('2023-01-05 12:00:00')
-  },
-  {
-    id: 2,
-    title: 'Salário',
-    type: 'receita',
-    category: 'salario',
-    amount: 1500.0,
-    date: new Date('2023-05-05 17:00:00')
-  },
-  {
-    id: 3,
-    title: 'Compras no shopping',
-    type: 'gasto',
-    category: 'roupas',
-    amount: 589.9,
-    date: new Date('2023-07-05 14:00:00')
-  },
-  {
-    id: 4,
-    title: 'Posto de combustível',
-    type: 'gasto',
-    category: 'carro',
-    amount: 940.0,
-    date: new Date('2023-10-05 07:40:00')
-  }
-];
-
 const Statement: React.FC<StatementProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { transactions } = useTransactions();
+  console.log(transactions?.length);
 
   const openModal = () => {
     setIsOpen(true);
@@ -116,46 +84,54 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((transaction) => {
-                const { id, title, type, category, amount, date } = transaction;
-                return (
-                  <tr key={id}>
-                    <td className="td-name">
-                      {categories.map((categoryItem) => {
-                        if (categoryItem.name === category) {
-                          return (
-                            <img
-                              className="icon-table"
-                              key={categoryItem.id}
-                              src={categoryItem.icon}
-                              alt={categoryItem.name}
-                              style={{ backgroundColor: categoryItem.color }}
-                            />
-                          );
-                        }
-                      })}
-                      {title}
-                    </td>
-                    <td
-                      className={cn(type)}
-                      style={{ color: type === 'receita' ? '#1CA477' : '#E22525' }}
-                    >
-                      {type === 'receita' ? '+ ' : '- '}
-                      {amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
-                    </td>
-                    <td>
-                      {date.toLocaleDateString('pt', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: '2-digit'
-                      })}
-                    </td>
-                    <td>
-                      <button className="button-detail">Detalhes</button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {transactions ? (
+                transactions?.map((transaction) => {
+                  const { id, title, type, category, amount, date } = transaction;
+                  return (
+                    <tr key={id}>
+                      <td className="td-name">
+                        {categories.map((categoryItem) => {
+                          if (categoryItem.name === category) {
+                            return (
+                              <img
+                                className="icon-table"
+                                key={categoryItem.id}
+                                src={categoryItem.icon}
+                                alt={categoryItem.name}
+                                style={{ backgroundColor: categoryItem.color }}
+                              />
+                            );
+                          }
+                        })}
+                        {title}
+                      </td>
+                      <td
+                        className={cn(type)}
+                        style={{ color: type === 'receita' ? '#1CA477' : '#E22525' }}
+                      >
+                        {type === 'receita' ? '+ ' : '- '}
+                        {amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                      </td>
+                      <td>
+                        {date.toLocaleDateString('pt', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: '2-digit'
+                        })}
+                      </td>
+                      <td>
+                        <button className="button-detail">Detalhes</button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={4} className="td-empty">
+                    Nenhuma transação encontrada
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
