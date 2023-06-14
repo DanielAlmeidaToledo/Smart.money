@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 
 class TransactionRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

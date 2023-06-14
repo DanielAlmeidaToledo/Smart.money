@@ -30,3 +30,5 @@ CREATE TABLE
         bank VARCHAR(255) NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id)
     );
+
+# Querys Transaction 

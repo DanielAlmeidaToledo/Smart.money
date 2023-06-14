@@ -17,7 +17,7 @@ services:
 
     # nginx
     nginx:
-        image: nginx:alpine
+        image: nginx
         restart: unless-stopped
         ports:
             - "8989:80"
