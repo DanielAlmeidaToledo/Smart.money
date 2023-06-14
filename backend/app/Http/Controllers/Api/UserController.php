@@ -41,7 +41,7 @@ class UserController extends Controller
     public function updateUser(RegisterUpdateUserRequest $request, string $id)
     {
         $user = User::findOrFail($id);
-        $data = $request->validated();
+        $data = $request->all();
 
         if ($request->filled('password'))
             $data['password'] = bcrypt($request->password);

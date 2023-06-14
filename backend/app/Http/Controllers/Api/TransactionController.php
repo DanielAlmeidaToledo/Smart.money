@@ -12,7 +12,7 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::select('id', 'user_id', 'title', 'type', 'category', 'amount')->get(10);
+        $transactions = Transaction::select('id', 'user_id', 'title', 'type', 'category', 'amount', 'created_at')->get(10);
         return TransactionResource::collection($transactions);
     }
 
@@ -43,6 +43,10 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::findOrFail($id);
         $data = $request->all();
+
+        if ($request->filled('user_id') && $request->user_id === null)
+            $data['user_id'] = $request->user_id;
+
         $transaction->update($data);
 
         return new TransactionResource($transaction);
