@@ -17,5 +17,7 @@ Route::patch('/transactions/{id}', [TransactionController::class, 'updateTransac
 Route::delete('/transactions/{id}', [TransactionController::class, 'deleteTransaction']);
 
 Route::get('/', function () {
-    return redirect('/users');
+    return response()->json([
+        'message' => 'Welcome to the API',
+    ]);
 });

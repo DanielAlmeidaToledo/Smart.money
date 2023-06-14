@@ -27,7 +27,6 @@ class UserController extends Controller
 
     public function register(RegisterUpdateUserRequest $request)
     {
-        $data = $request->all();
         $data = [
             'id' => Uuid::uuid4()->toString(),
             'password' => bcrypt($request->password),
