@@ -5,6 +5,7 @@ import useAuthContext from './contexts/AuthContext';
 import axios from './api/axios';
 import { useState, useEffect } from 'react';
 
+
 import './styles/main.scss';
 
 import { Outlet } from 'react-router-dom';

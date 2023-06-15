@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from './../api/axios';
 
 type AuthProps = {
@@ -30,6 +31,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
   });
   const [errors, setErrors] = useState<any[]>([]);
 
+  const navigate = useNavigate();
+
   const getUser = async (userId: string) => {
     try {
       const { data } = await axios.get(`/users/${userId}`);
@@ -44,8 +47,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
       const response = await axios.post('/login', data);
       const { id, name, email, created_at } = response.data;
       setUser({ id, name, email, created_at });
-      window.location.href = '/dashboard';
       setErrors([]);
+      navigate('/dashboard');
     } catch (e: any) {
       if (e.response && e.response.status === 422) {
         setErrors(e.response.data.errors.error);
@@ -57,7 +60,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     try {
       const response = await axios.post('/users', data);
       setUser(response.data.data);
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     } catch (e: any) {
       if (e.response && e.response.status === 422) {
         setErrors(e.response.data.errors);
