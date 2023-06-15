@@ -16,7 +16,7 @@ class TransactionResource extends JsonResource
             'type' => $this->type,
             'category' => $this->category,
             'amount' => $this->amount,
-            'created_at' => $this->created_at,
+            'created_at' => Carbon::make($this->created_at)->format('d-m-Y'),
         ];
     }
 }
