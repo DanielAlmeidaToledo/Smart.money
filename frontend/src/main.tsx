@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
 import './styles/_reset.scss';
@@ -14,56 +14,28 @@ import Goals from './Pages/Goals/Goals';
 import CardsList from './Pages/CardsList/CardsList';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
-
-const router = createBrowserRouter(
-  [
-    {
-      path: '/',
-      element: <LandingPage />
-    },
-    {
-      path: '',
-      element: <App />,
-      children: [
-        {
-          path: '/dashboard',
-          element: <Home />
-        },
-        {
-          path: '/extrato',
-          element: <Statement />
-        },
-        {
-          path: '/cartoes',
-          element: <CardsList />
-        },
-        {
-          path: '/metas',
-          element: <Goals />
-        },
-        {
-          path: '/ajustes',
-          element: <CardsList />
-        }
-      ],
-      errorElement: <div>404</div>
-    },
-    {
-      path: '/login',
-      element: <Login />
-    },
-    {
-      path: '/cadastro',
-      element: <Register />
-    }
-  ],
-  { basename: import.meta.env.VITE_BASENAME }
-);
+import Settings from './Pages/Settings/Settings';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Register />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Register />} />
+          <Route path="/" element={<App />}>
+            <Route path="/dashboard" element={<Home />} />
+            <Route path="/extrato" element={<Statement />} />
+            <Route path="/cartoes" element={<CardsList />} />
+            <Route path="/metas" element={<Goals />} />
+            <Route path="/ajustes" element={<Settings />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
