@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from './../api/axios';
 
@@ -16,8 +16,9 @@ type AuthContextType = {
   errors: any[];
   setErrors: (errors: any[]) => void;
   getUser: (userId: string) => Promise<void>;
-  login: (data: any) => Promise<void>;
   register: (data: any) => Promise<void>;
+  login: (data: any) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -78,14 +79,15 @@ export const AuthProvider = ({ children }: AuthProps) => {
         email: '',
         created_at: ''
       });
-      window.location.href = '/';
+      setErrors([]);
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, errors, setErrors, getUser, login, register }}>
+    <AuthContext.Provider value={{ user, errors, setErrors, getUser, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

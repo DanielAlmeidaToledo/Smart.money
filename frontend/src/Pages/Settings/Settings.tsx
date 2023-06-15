@@ -11,8 +11,6 @@ type SettingsProps = {
 const Settings: React.FC<SettingsProps> = ({ className }) => {
   const { user } = useAuthContext();
 
-  console.log(user);
-
   return (
     <div className={cn('__settings-container', className)}>
       <h2>Ajustes</h2>
