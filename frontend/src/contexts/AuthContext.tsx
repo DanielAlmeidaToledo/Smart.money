@@ -13,6 +13,7 @@ type AuthContextType = {
     created_at: string;
   };
   errors: any[];
+  setErrors: (errors: any[]) => void;
   getUser: (userId: string) => Promise<void>;
   login: (data: any) => Promise<void>;
   register: (data: any) => Promise<void>;
@@ -44,11 +45,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
       const { id, name, email, created_at } = response.data;
       setUser({ id, name, email, created_at });
       window.location.href = '/dashboard';
+      setErrors([]);
     } catch (e: any) {
-      // if (e.response && e.response.status === 422) {
-      //   setErrors(e.response.data.errors.error);
-      // }
-      console.log(setErrors(e.response.data.errors));
+      if (e.response && e.response.status === 422) {
+        setErrors(e.response.data.errors.error);
+      }
     }
   };
 
@@ -61,11 +62,27 @@ export const AuthProvider = ({ children }: AuthProps) => {
       if (e.response && e.response.status === 422) {
         setErrors(e.response.data.errors);
       }
+      setErrors([]);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await axios.post('/logout');
+      setUser({
+        id: '',
+        name: '',
+        email: '',
+        created_at: ''
+      });
+      window.location.href = '/';
+    } catch (error) {
+      console.error(error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, errors, getUser, login, register }}>
+    <AuthContext.Provider value={{ user, errors, setErrors, getUser, login, register }}>
       {children}
     </AuthContext.Provider>
   );

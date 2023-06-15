@@ -15,7 +15,7 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ className }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuthContext();
+  const { login, errors } = useAuthContext();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -70,6 +70,14 @@ const Login: React.FC<LoginProps> = ({ className }) => {
               />
               <p>Esqueci minha senha</p>
             </div>
+            {errors && (
+              <div className={cn('__login-form-errors')}>
+                {errors.map((error: any, index: number) => (
+                  <span key={index}>{error}</span>
+                ))}
+              </div>
+            )}
+
             <button className={cn('__login-form-button')} type="submit">
               Entrar
             </button>
