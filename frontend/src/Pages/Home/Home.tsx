@@ -1,11 +1,9 @@
 import cn from 'classnames';
-// import { useEffect } from 'react';
-// import useAuthContext from '../../contexts/AuthContext';
+import useAuthContext from '../../contexts/AuthContext';
 
 import './Home.scss';
 
 import OverallBalance from '../../components/Home/OverallBalance/OverallBalance';
-
 import Cards from '../../components/Home/Cards/Cards';
 import Goal from '../../components/Home/GoalCard/GoalCard';
 import Transactions from '../../components/Home/Transactions/Transactions';
@@ -72,14 +70,7 @@ const user2 = {
 };
 
 const Home: React.FC<HomeProps> = ({ className }) => {
-  // const { user, getUser } = useAuthContext();
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     getUser('2d8936f0-7ba2-4b30-b8ca-b1d96b4706cc');
-  //   }
-  //   console.log(user);
-  // }, []);
+  const { user } = useAuthContext();
 
   return (
     <div className={cn('__home-container', className)}>

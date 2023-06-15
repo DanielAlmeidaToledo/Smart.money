@@ -6,7 +6,12 @@ type AuthProps = {
 };
 
 type AuthContextType = {
-  user: any;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    created_at: string;
+  };
   errors: any[];
   getUser: (userId: string) => Promise<void>;
   login: (data: any) => Promise<void>;
@@ -16,7 +21,12 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProps) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    id: '',
+    name: '',
+    email: '',
+    created_at: ''
+  });
   const [errors, setErrors] = useState<any[]>([]);
 
   const getUser = async (userId: string) => {
@@ -30,11 +40,13 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
   const login = async ({ ...data }) => {
     try {
-      await axios.post('/users', data);
-      // getUser();
+      const response = await axios.post('/login', data);
+      const { id, name, email, created_at } = response.data;
+      setUser({ id, name, email, created_at });
+      window.location.href = '/dashboard';
     } catch (e: any) {
-      if (e.response.status === 422) {
-        setErrors(e.response.data.errors);
+      if (e.response && e.response.status === 422) {
+        setErrors(e.response.data.errors.error);
       }
     }
   };
@@ -42,7 +54,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const register = async ({ ...data }) => {
     try {
       const response = await axios.post('/users', data);
-      await getUser(response.data.id);
+      setUser(response.data.data);
+      window.location.href = '/dashboard';
     } catch (e: any) {
       if (e.response && e.response.status === 422) {
         setErrors(e.response.data.errors);

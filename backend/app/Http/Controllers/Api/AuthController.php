@@ -11,22 +11,24 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function login(AuthRequest $request)
+    public function auth(AuthRequest $request)
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect']
+                'error' => 'Credenciais inválidas',
             ]);
         }
 
-        $user->tokens()->delete();
+        return $user;
 
-        $token = $user->createToken('api')->plainTextToken;
+        // $user->tokens()->delete();
 
-        return response()->json([
-            'token' => $token,
-        ]);
+        // $token = $user->createToken('login')->plainTextToken;
+
+        // return response()->json([
+        //     'token' => $token,
+        // ]);
     }
 
     public function logout(Request $request)
@@ -35,6 +37,15 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'success',
+        ]);
+    }
+
+    public function me(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'me' => $user,
         ]);
     }
 }

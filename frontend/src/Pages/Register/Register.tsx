@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import cn from 'classnames';
 import useAuthContext from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 import './Register.scss';
 
@@ -17,8 +16,7 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { register, errors } = useAuthContext();
-  const navigate = useNavigate();
+  const { register, errors, user } = useAuthContext();
 
   const handleRegister = async (e: any) => {
     e.preventDefault();
@@ -27,9 +25,6 @@ const Register: React.FC<RegisterProps> = ({ className }) => {
       email: email,
       password: password
     });
-    if (errors.length === 0) {
-      navigate('/login');
-    }
   };
 
   return (

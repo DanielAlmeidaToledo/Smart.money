@@ -29,10 +29,20 @@ const categories = [
   { id: 9, name: 'outros', icon: FoodIcon, color: '#71199A' }
 ];
 
+const transactions = [
+{
+  id: 1,
+  title: 'Almoço - Restaurante',
+  type: 'gasto',
+  category: 'comida',
+  amount: 350,
+  date: new Date('2023-01-05 12:00:00')
+},
+];
+
 const Statement: React.FC<StatementProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { transactions } = useTransactions();
-  console.log(transactions?.length);
+  // const { transactions } = useTransactions();
 
   const openModal = () => {
     setIsOpen(true);
