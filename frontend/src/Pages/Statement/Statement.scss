@@ -3,14 +3,10 @@
 @import '../../styles/mixins/breakpoints';
 
 .__statement-container {
-    height: 100%;
-    width: 95%;
-    margin: 0 auto;
+    @include contentContainer;
 
     h2 {
-        font-size: 3rem;
-        font-weight: bold;
-        height: 10%;
+        @include titleContainer;
     }
 
     .__statement-content {
