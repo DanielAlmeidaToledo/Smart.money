@@ -41,7 +41,7 @@ services:
         ports:
             - "3388:3306"
         networks:
-            - laravel 
+            - laravel
 
     # phpmyadmin
     phpmyadmin:
