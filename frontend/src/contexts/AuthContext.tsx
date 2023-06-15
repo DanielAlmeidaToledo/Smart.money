@@ -45,9 +45,10 @@ export const AuthProvider = ({ children }: AuthProps) => {
       setUser({ id, name, email, created_at });
       window.location.href = '/dashboard';
     } catch (e: any) {
-      if (e.response && e.response.status === 422) {
-        setErrors(e.response.data.errors.error);
-      }
+      // if (e.response && e.response.status === 422) {
+      //   setErrors(e.response.data.errors.error);
+      // }
+      console.log(setErrors(e.response.data.errors));
     }
   };
 
