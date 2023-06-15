@@ -157,6 +157,15 @@
                         }
                     }
                 }
+                .__login-form-errors {
+                    width: 70%;
+                    text-align: center;
+                    font-size: 1.6rem;
+                    color: getColor('error');
+                    height: 1rem;
+                    margin: 0 auto;
+                }
+
                 .__login-form-button {
                     @include buttonSubmit;
                     text-decoration: none;
