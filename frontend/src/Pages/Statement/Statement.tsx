@@ -1,17 +1,18 @@
+import { useState, useEffect } from 'react';
 import cn from 'classnames';
-import { useState } from 'react';
+import axios from '../../api/axios';
+import useAuthContext from '../../contexts/AuthContext';
+import { TransactionProps } from '../../contexts/Props';
+import TransactionModal from '../../components/Statement/TransactionModal/TransactionModal';
 
 import './Statement.scss';
 
-import SearchIcon from '../../assets/icons/search-icon.svg';
+import CarIcon from '../../assets/icons/car-icon.svg';
 import CardIcon from '../../assets/icons/card-icon.svg';
 import FoodIcon from '../../assets/icons/food-icon.svg';
+import SearchIcon from '../../assets/icons/search-icon.svg';
 import SalaryIcon from '../../assets/icons/salary-icon.svg';
 import ClothesIcon from '../../assets/icons/clothing-icon.svg';
-import CarIcon from '../../assets/icons/car-icon.svg';
-
-import TransactionModal from '../../components/Statement/TransactionModal/TransactionModal';
-import { useTransactions } from '../../components/useOutletContext/useOutletContext';
 
 type StatementProps = {
   className?: string;
@@ -29,20 +30,21 @@ const categories = [
   { id: 9, name: 'outros', icon: FoodIcon, color: '#71199A' }
 ];
 
-const transactions = [
-{
-  id: 1,
-  title: 'Almoço - Restaurante',
-  type: 'gasto',
-  category: 'comida',
-  amount: 350,
-  date: new Date('2023-01-05 12:00:00')
-},
-];
-
 const Statement: React.FC<StatementProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const { transactions } = useTransactions();
+  const [transactions, setTransactions] = useState<TransactionProps>();
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    axios
+      .get(`/transactions/${user?.id}`)
+      .then((response) => {
+        setTransactions(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [user?.id]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -94,7 +96,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
               </tr>
             </thead>
             <tbody>
-              {transactions ? (
+              {transactions?.length ? (
                 transactions?.map((transaction) => {
                   const { id, title, type, category, amount, date } = transaction;
                   return (
@@ -112,15 +114,19 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
                               />
                             );
                           }
+                          return null;
                         })}
                         {title}
                       </td>
                       <td
                         className={cn(type)}
-                        style={{ color: type === 'receita' ? '#1CA477' : '#E22525' }}
+                        style={{ color: type === 'income' ? '#1CA477' : '#E22525' }}
                       >
-                        {type === 'receita' ? '+ ' : '- '}
-                        {amount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                        {type === 'income' ? '+ ' : '- '}
+                        {amount.toLocaleString('pt-br', {
+                          style: 'currency',
+                          currency: 'BRL'
+                        })}
                       </td>
                       <td>
                         {date.toLocaleDateString('pt', {
@@ -138,7 +144,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
               ) : (
                 <tr>
                   <td colSpan={4} className="td-empty">
-                    Nenhuma transação encontrada
+                    Nenhuma transação encontrada.
                   </td>
                 </tr>
               )}

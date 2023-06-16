@@ -74,6 +74,11 @@
                         gap: 1.5rem;
                     }
 
+                    .td-empty {
+                       text-align: center;
+                       padding: 10rem 0;
+                    }
+
                     .button-detail {
                         @include buttonOrInput;
                         border: 1px solid getColor('primary');
