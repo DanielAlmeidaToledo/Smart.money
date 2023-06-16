@@ -33,4 +33,4 @@ export type TransactionProps = {
   category: string;
   amount: number;
   date: Date;
-};
+}[];

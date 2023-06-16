@@ -1,4 +1,7 @@
 import cn from 'classnames';
+import { useState } from 'react';
+import axios from '../../../api/axios';
+import useAuthContext from '../../../contexts/AuthContext';
 
 import './TransactionModal.scss';
 
@@ -8,6 +11,32 @@ type TransactionModalProps = {
 };
 
 const TransactionModal: React.FC<TransactionModalProps> = ({ className, onClose }) => {
+  const [title, setTitle] = useState('');
+  const [type, setType] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [category, setCategory] = useState('');
+  const { user } = useAuthContext();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    axios
+      .post(`/transactions`, {
+        user_id: user?.id,
+        title: title,
+        type: type,
+        amount: amount,
+        category: category
+      })
+      .then((response) => {
+        console.log(response);
+        onClose();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className={cn('__transaction-modal-container', className)}>
       <div className={cn('__transaction-modal-content')}>
@@ -18,37 +47,42 @@ const TransactionModal: React.FC<TransactionModalProps> = ({ className, onClose 
           </button>
         </div>
         <div className={cn('__transaction-modal-body')}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className={cn('__transaction-modal-body-input')}>
               <label htmlFor="title">Nome</label>
-              <input type="text" name="title" id="title" />
+              <input
+                type="text"
+                name="title"
+                id="title"
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
+            <div
+              className={cn('__transaction-modal-body-input', '__transaction-modal-body-select')}
+            >
+              <label htmlFor="type">Tipo</label>
+              <select name="type" id="type" onChange={(e) => setType(e.target.value)}>
+                <option value="all">Selecione</option>
+                <option value="expense">Gasto</option>
+                <option value="income">Receita</option>
+              </select>
+            </div>
+
             <div className={cn('__transaction-modal-body-div')}>
               <div className={cn('__transaction-modal-body-input')}>
                 <label htmlFor="amount">Valor</label>
-                <input type="number" name="amount" id="amount" />
-              </div>
-              <div className={cn('__transaction-modal-body-input')}>
-                <label htmlFor="date">Data</label>
-                <input type="date" name="date" id="date" />
-              </div>
-            </div>
-            <div className={cn('__transaction-modal-body-div')}>
-              <div
-                className={cn('__transaction-modal-body-input', '__transaction-modal-body-select')}
-              >
-                <label htmlFor="type">Tipo</label>
-                <select name="type" id="type">
-                  <option value="all">Selecione</option>
-                  <option value="gasto">Gasto</option>
-                  <option value="receita">Receita</option>
-                </select>
+                <input
+                  type="number"
+                  name="amount"
+                  id="amount"
+                  onChange={(e) => setAmount(Number(e.target.value))}
+                />
               </div>
               <div
                 className={cn('__transaction-modal-body-input', '__transaction-modal-body-select')}
               >
                 <label htmlFor="category">Categoria</label>
-                <select name="category" id="category">
+                <select name="category" id="category" onChange={(e) => setCategory(e.target.value)}>
                   <option value="all">Selecione</option>
                   <option value="alimentacao">Alimentação</option>
                   <option value="educacao">Educação</option>
