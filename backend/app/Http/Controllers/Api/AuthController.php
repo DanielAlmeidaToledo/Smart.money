@@ -38,9 +38,7 @@ class AuthController extends Controller
         $cookieValue = time();
 
         // Retorna a resposta JSON com o usuário autenticado e define o cookie
-        return response()->json([
-            'user' => $user,
-        ])->withCookie($cookieName, $cookieValue, $tempo_inatividade);
+        return response()->json($user)->cookie($cookieName, $cookieValue, $tempo_inatividade);
     }
 
 

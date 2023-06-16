@@ -8,9 +8,14 @@ import './TransactionModal.scss';
 type TransactionModalProps = {
   className?: string;
   onClose: () => void;
+  searchTransactions: () => void;
 };
 
-const TransactionModal: React.FC<TransactionModalProps> = ({ className, onClose }) => {
+const TransactionModal: React.FC<TransactionModalProps> = ({
+  className,
+  onClose,
+  searchTransactions
+}) => {
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
   const [amount, setAmount] = useState(0);
@@ -31,6 +36,7 @@ const TransactionModal: React.FC<TransactionModalProps> = ({ className, onClose 
       .then((response) => {
         console.log(response);
         onClose();
+        searchTransactions();
       })
       .catch((error) => {
         console.log(error);
@@ -90,7 +96,7 @@ const TransactionModal: React.FC<TransactionModalProps> = ({ className, onClose 
                   <option value="moradia">Moradia</option>
                   <option value="saude">Saúde</option>
                   <option value="transporte">Transporte</option>
-                  <option value="trabalho">Trabalho</option>
+                  <option value="compras">Compras</option>
                 </select>
               </div>
             </div>

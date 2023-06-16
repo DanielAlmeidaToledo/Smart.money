@@ -18,10 +18,25 @@ class TransactionController extends Controller
 
     public function showTransaction(string $id)
     {
-        $transaction = Transaction::select('id', 'amount', 'description', 'created_at')
+        $transaction = Transaction::select('id', 'user_id', 'title', 'type', 'category', 'amount', 'created_at')
             ->where('id', $id)
-            ->findOrFail();
+            ->firstOrFail();
         return new TransactionResource($transaction);
+    }
+
+    public function showTransactionForId(string $user_id)
+    {
+        $transactions = Transaction::select('id', 'user_id', 'title', 'type', 'category', 'amount', 'created_at')
+            ->where('user_id', $user_id)
+            ->get();
+
+        $transactionResources = [];
+
+        foreach ($transactions as $transaction) {
+            $transactionResources[] = new TransactionResource($transaction);
+        }
+
+        return $transactionResources;
     }
 
     public function createTransaction(TransactionRequest $request)

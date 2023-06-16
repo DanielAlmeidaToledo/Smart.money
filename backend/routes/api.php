@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\GoalController;
 use App\Http\Controllers\Api\TransactionController;
 
-
+# Rotas para autenticação
 Route::post('/login', [AuthController::class, 'auth']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
@@ -22,6 +22,7 @@ Route::delete('/users/{id}', [UserController::class, 'deleteUser']);
 # Rotas para o CRUD de transações
 Route::get('/transactions', [TransactionController::class, 'index']);
 Route::get('/transactions/{id}', [TransactionController::class, 'showTransaction']);
+Route::get('/transactions/user/{user_id}', [TransactionController::class, 'showTransactionForId']);
 Route::post('/transactions', [TransactionController::class, 'createTransaction']);
 Route::patch('/transactions/{id}', [TransactionController::class, 'updateTransaction']);
 Route::delete('/transactions/{id}', [TransactionController::class, 'deleteTransaction']);

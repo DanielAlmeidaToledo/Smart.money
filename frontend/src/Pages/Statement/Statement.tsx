@@ -19,32 +19,35 @@ type StatementProps = {
 };
 
 const categories = [
-  { id: 1, name: 'comida', icon: FoodIcon, color: '#71199A' },
-  { id: 2, name: 'salario', icon: SalaryIcon, color: '#1CA477' },
-  { id: 3, name: 'roupas', icon: ClothesIcon, color: '#19359A' },
-  { id: 4, name: 'carro', icon: CarIcon, color: '#8B4C1F' },
-  { id: 5, name: 'lazer', icon: FoodIcon, color: '#71199A' },
-  { id: 6, name: 'transporte', icon: FoodIcon, color: '#71199A' },
-  { id: 7, name: 'saude', icon: FoodIcon, color: '#71199A' },
-  { id: 8, name: 'educacao', icon: FoodIcon, color: '#71199A' },
-  { id: 9, name: 'outros', icon: FoodIcon, color: '#71199A' }
+  { id: 1, name: 'all', icon: FoodIcon, color: '#71199A' },
+  { id: 2, name: 'alimentacao', icon: FoodIcon, color: '#1CA477' },
+  { id: 3, name: 'educacao', icon: ClothesIcon, color: '#19359A' },
+  { id: 4, name: 'lazer', icon: CarIcon, color: '#8B4C1F' },
+  { id: 5, name: 'moradia', icon: FoodIcon, color: '#71199A' },
+  { id: 6, name: 'saude', icon: FoodIcon, color: '#71199A' },
+  { id: 7, name: 'transporte', icon: FoodIcon, color: '#71199A' },
+  { id: 8, name: 'compras', icon: ClothesIcon, color: '#71199A' }
 ];
 
 const Statement: React.FC<StatementProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [transactions, setTransactions] = useState<TransactionProps>();
+  const [transactions, setTransactions] = useState<TransactionProps>([]);
   const { user } = useAuthContext();
 
   useEffect(() => {
+    searchTransactions();
+  }, [user?.id]);
+
+  const searchTransactions = () => {
     axios
-      .get(`/transactions/${user?.id}`)
+      .get(`/transactions/user/${user.id}`)
       .then((response) => {
         setTransactions(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [user?.id]);
+  };
 
   const openModal = () => {
     setIsOpen(true);
@@ -81,6 +84,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
           {isOpen && (
             <TransactionModal
               onClose={closeModal}
+              searchTransactions={searchTransactions}
               className={cn(className, '__transaction-modal')}
             />
           )}
@@ -96,9 +100,9 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
               </tr>
             </thead>
             <tbody>
-              {transactions?.length ? (
-                transactions?.map((transaction) => {
-                  const { id, title, type, category, amount, date } = transaction;
+              {transactions ? (
+                transactions.map((transaction) => {
+                  const { id, title, type, category, amount, created_at } = transaction;
                   return (
                     <tr key={id}>
                       <td className="td-name">
@@ -128,13 +132,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
                           currency: 'BRL'
                         })}
                       </td>
-                      <td>
-                        {date.toLocaleDateString('pt', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: '2-digit'
-                        })}
-                      </td>
+                      <td>{created_at.toString()}</td>
                       <td>
                         <button className="button-detail">Detalhes</button>
                       </td>

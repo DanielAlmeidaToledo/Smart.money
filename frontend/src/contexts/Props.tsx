@@ -32,5 +32,5 @@ export type TransactionProps = {
   type: string;
   category: string;
   amount: number;
-  date: Date;
+  created_at: Date;
 }[];
