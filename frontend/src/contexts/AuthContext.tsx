@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from './../api/axios';
 
@@ -6,16 +7,18 @@ type AuthProps = {
   children: React.ReactNode;
 };
 
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  created_at: string;
+};
+
 type AuthContextType = {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    created_at: string;
-  };
+  user: User;
   errors: any[];
   setErrors: (errors: any[]) => void;
-  getUser: (userId: string) => Promise<void>;
+  setUser: (user: User) => void;
   register: (data: any) => Promise<void>;
   login: (data: any) => Promise<void>;
   logout: () => Promise<void>;
@@ -23,25 +26,24 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const cookies = new Cookies();
+
 export const AuthProvider = ({ children }: AuthProps) => {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     id: '',
     name: '',
     email: '',
     created_at: ''
   });
   const [errors, setErrors] = useState<any[]>([]);
-
   const navigate = useNavigate();
 
-  const getUser = async (userId: string) => {
-    try {
-      const { data } = await axios.get(`/users/${userId}`);
-      setUser(data);
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    const userCookie = cookies.get('user');
+    if (userCookie) {
+      setUser(userCookie);
     }
-  };
+  }, []);
 
   const login = async ({ ...data }) => {
     try {
@@ -49,6 +51,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       const { id, name, email, created_at } = response.data;
       setUser({ id, name, email, created_at });
       setErrors([]);
+      cookies.set('user', { id, name, email, created_at });
       navigate('/dashboard');
     } catch (e: any) {
       if (e.response && e.response.status === 422) {
@@ -87,7 +90,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, errors, setErrors, getUser, register, login, logout }}>
+    <AuthContext.Provider value={{ user, errors, setErrors, setUser, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

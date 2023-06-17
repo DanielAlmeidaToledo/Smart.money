@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import useAuthContext from '../../contexts/AuthContext';
+import Cookies from 'universal-cookie';
 
 import './Home.scss';
 
@@ -69,10 +70,13 @@ const user2 = {
   ]
 };
 
+const cookies = new Cookies();
+
 const Home: React.FC<HomeProps> = ({ className }) => {
   const { user } = useAuthContext();
 
-  console.log(user);
+  console.log('user ---> ', user);
+  console.log('Cookies ---> ', cookies.get('user'));
 
   return (
     <div className={cn('__home-container', className)}>
