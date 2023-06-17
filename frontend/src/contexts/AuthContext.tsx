@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const [errors, setErrors] = useState<any[]>([]);
   const navigate = useNavigate();
 
+  // Verifica se o usuário está logado
   useEffect(() => {
     const userCookie = cookies.get('user');
     if (userCookie) {
@@ -45,6 +46,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     }
   }, []);
 
+  // Função para fazer login
   const login = async ({ ...data }) => {
     try {
       const response = await axios.post('/login', data);
@@ -60,6 +62,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     }
   };
 
+  // Função para fazer cadastro
   const register = async ({ ...data }) => {
     try {
       const response = await axios.post('/users', data);
@@ -73,6 +76,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     }
   };
 
+  // Função para fazer logout
   const logout = async () => {
     try {
       await axios.post('/logout');
@@ -82,6 +86,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         email: '',
         created_at: ''
       });
+      cookies.remove('user');
       setErrors([]);
       navigate('/');
     } catch (error) {

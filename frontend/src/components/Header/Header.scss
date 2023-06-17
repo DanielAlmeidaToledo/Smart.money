@@ -13,4 +13,33 @@
     width: 2.5rem;
     cursor: pointer;
   }
+
+  .__dropdown-content {
+    background-color: getColor('sidebar-background');
+    box-shadow: getColor('box-shadow');
+    border: 1px solid getColor('stroke');
+    width: 14rem;
+    margin-top: 1rem;
+    border-radius: .8rem;
+    z-index: 100;
+
+    .__dropdown-item {
+      width: 100%;
+      cursor: pointer;
+
+      a, div {
+        width: 100%;
+        padding: 1.4rem 3rem;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        :nth-child(n+1) {
+          color: getColor('text-on-primary');
+        }
+      }
+    }
+  }
+
 }

@@ -76,7 +76,6 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   const { user } = useAuthContext();
 
   console.log('user ---> ', user);
-  console.log('Cookies ---> ', cookies.get('user'));
 
   return (
     <div className={cn('__home-container', className)}>
