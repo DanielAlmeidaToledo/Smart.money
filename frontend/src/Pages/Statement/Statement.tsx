@@ -4,34 +4,38 @@ import axios from '../../api/axios';
 import useAuthContext from '../../contexts/AuthContext';
 import { TransactionProps } from '../../contexts/Props';
 import TransactionModal from '../../components/Statement/TransactionModal/TransactionModal';
+import TransactionEdit from '../../components/Statement/TransactionEdit/TransactionEdit';
 
 import './Statement.scss';
 
-import CarIcon from '../../assets/icons/car-icon.svg';
 import CardIcon from '../../assets/icons/card-icon.svg';
 import FoodIcon from '../../assets/icons/food-icon.svg';
 import SearchIcon from '../../assets/icons/search-icon.svg';
 import SalaryIcon from '../../assets/icons/salary-icon.svg';
 import ClothesIcon from '../../assets/icons/clothing-icon.svg';
+import GeralIcon from '../../assets/icons/finance-icon.svg';
+import HealthIcon from '../../assets/icons/health-icon.svg';
+import CarIcon from '../../assets/icons/car-icon.svg';
+
+const categories = [
+  { id: 1, name: 'all', icon: GeralIcon, color: '#A6A6A6' },
+  { id: 2, name: 'geral', icon: GeralIcon, color: '#008080' },
+  { id: 3, name: 'alimentacao', icon: FoodIcon, color: '#1CA477' },
+  { id: 5, name: 'saude', icon: HealthIcon, color: '#4DFFFF' },
+  { id: 6, name: 'transporte', icon: CarIcon, color: '#000000' },
+  { id: 7, name: 'compras', icon: ClothesIcon, color: '#FF4D79' },
+  { id: 8, name: 'salario', icon: SalaryIcon, color: '#71199A' }
+];
 
 type StatementProps = {
   className?: string;
 };
 
-const categories = [
-  { id: 1, name: 'all', icon: FoodIcon, color: '#71199A' },
-  { id: 2, name: 'alimentacao', icon: FoodIcon, color: '#1CA477' },
-  { id: 3, name: 'educacao', icon: ClothesIcon, color: '#19359A' },
-  { id: 4, name: 'lazer', icon: CarIcon, color: '#8B4C1F' },
-  { id: 5, name: 'moradia', icon: FoodIcon, color: '#71199A' },
-  { id: 6, name: 'saude', icon: FoodIcon, color: '#71199A' },
-  { id: 7, name: 'transporte', icon: FoodIcon, color: '#71199A' },
-  { id: 8, name: 'compras', icon: ClothesIcon, color: '#71199A' }
-];
-
 const Statement: React.FC<StatementProps> = ({ className }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [transactions, setTransactions] = useState<TransactionProps>([]);
+  const [selectedTransaction, setSelectedTransaction] = useState();
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -49,12 +53,23 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
       });
   };
 
-  const openModal = () => {
-    setIsOpen(true);
+  // Modal de adicionar transação
+  const openAddModal = () => {
+    setIsOpenAdd(!isOpenAdd);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const closeAddModal = () => {
+    setIsOpenAdd(false);
+  };
+
+  // Modal de editar transação
+  const openEditModal = async (transaction: any) => {
+    await setSelectedTransaction(transaction);
+    setIsOpenEdit(!isOpenEdit);
+  };
+
+  const closeEditModal = () => {
+    setIsOpenEdit(false);
   };
 
   return (
@@ -78,12 +93,15 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
               </select>
             </div>
           </div>
-          <button className={cn(className, 'button-add-transaction', 'Button')} onClick={openModal}>
+          <button
+            className={cn(className, 'button-add-transaction', 'Button')}
+            onClick={openAddModal}
+          >
             Adicionar
           </button>
-          {isOpen && (
+          {isOpenAdd && (
             <TransactionModal
-              onClose={closeModal}
+              onClose={closeAddModal}
               searchTransactions={searchTransactions}
               className={cn(className, '__transaction-modal')}
             />
@@ -134,7 +152,12 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
                       </td>
                       <td>{created_at.toString()}</td>
                       <td>
-                        <button className="button-detail">Detalhes</button>
+                        <button
+                          className="button-detail"
+                          onClick={() => openEditModal(transaction)}
+                        >
+                          Editar
+                        </button>
                       </td>
                     </tr>
                   );
@@ -150,6 +173,14 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
           </table>
         </div>
       </div>
+      {isOpenEdit && (
+        <TransactionEdit
+          onClose={closeEditModal}
+          searchTransactions={searchTransactions}
+          selectedTransaction={selectedTransaction}
+          className={cn(className, '__transaction-edit')}
+        />
+      )}
     </div>
   );
 };

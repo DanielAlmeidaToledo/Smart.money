@@ -1,0 +1,115 @@
+@import '../../../styles/abstracts/colors';
+@import '../../../styles/mixins/mixins';
+@import '../../../styles/mixins/breakpoints';
+
+.__transaction-edit-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0 0 0 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    @include allCenter;
+
+    .__transaction-edit-content {
+        padding: 4rem 6rem;
+        border-radius: 1rem;
+        background-color: getColor('sidebar-background');
+        color: getColor('text-on-primary');
+        box-shadow: 0px 0px 10px #121212;
+        display: flex;
+        flex-direction: column;
+
+        .__transaction-edit-header {
+            width: 100%;
+            height: 5rem;
+            gap: 10rem;
+            display: flex;
+            justify-content: space-between;
+
+            h2 {
+                @include allCenter;
+            }
+
+            button {
+                border: none;
+                background-color: transparent;
+                color: getColor('primary');
+                font-size: 3.6rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: .1s;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .__transaction-edit-body {
+            width: 100%;
+            margin-top: 2rem;
+
+            form {
+                width: 100%;
+            }
+
+            .__transaction-edit-body-input {
+                display: block;
+                margin: 1.5rem 0;
+
+                label {
+                    font-size: 1.2em;
+                }
+                
+                input, select {
+                    @include buttonOrInput;
+                    width: 100%;
+                    margin: .5rem 0;
+                    padding: 0 2rem;
+                    border: 1px solid getColor('stroke');
+                    outline: none;
+
+                    &:focus {
+                        border: 1px solid getColor('primary');
+                    }
+                }
+            }
+
+            .__transaction-edit-body-div {
+                display: flex;
+                justify-content: space-between;
+                
+                div {
+                    width: 48%;
+                }
+            }
+
+            .__transaction-edit-body-buttons {
+                width: 100%;
+                margin-top: 1.6rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                button {
+                    @include buttonSubmit;
+                    width: 48%;
+                    margin: 1rem 0;
+                }
+
+                .button-delete {
+                    @include buttonSubmit;
+                    color: getColor('error');
+                    border: 1px solid getColor('error');
+                    background-color: transparent;
+                    width: 48%;
+                    margin: 1rem 0;
+    
+                    &:hover {
+                        box-shadow: 0px 0px 10px getColor('error');
+                    }
+                }
+            }
+        }
+    }
+}
