@@ -91,12 +91,11 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
                 <select name="category" id="category" onChange={(e) => setCategory(e.target.value)}>
                   <option value="all">Selecione</option>
                   <option value="alimentacao">Alimentação</option>
-                  <option value="educacao">Educação</option>
-                  <option value="lazer">Lazer</option>
-                  <option value="moradia">Moradia</option>
                   <option value="saude">Saúde</option>
                   <option value="transporte">Transporte</option>
                   <option value="compras">Compras</option>
+                  <option value="salario">Salário</option>
+                  <option value="geral">Outros</option>
                 </select>
               </div>
             </div>
