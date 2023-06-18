@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     if (userCookie) {
       setUser(userCookie);
     }
-  }, []);
+  }, []); 
 
   // Função para fazer login
   const login = async ({ ...data }) => {

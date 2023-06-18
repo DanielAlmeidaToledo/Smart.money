@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie';
 import useAuthContext from './contexts/AuthContext';
 import { Outlet, useNavigate } from 'react-router-dom';
 
+
 function App() {
   const { user, setUser } = useAuthContext();
   const navigate = useNavigate();

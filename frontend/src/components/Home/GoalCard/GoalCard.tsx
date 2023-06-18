@@ -9,7 +9,7 @@ import PaperHeader from '../Paper/PaperHeader';
 
 type GoalCardProps = {
   className?: string;
-  goal: {
+  goal?: {
     id: number;
     title: string;
     type: string;
@@ -19,6 +19,16 @@ type GoalCardProps = {
 };
 
 const GoalCard: React.FC<GoalCardProps> = ({ className, goal }) => {
+  if (!goal) {
+    goal = {
+      id: 0,
+      title: '',
+      type: '',
+      amount: 0,
+      balance: 0
+    };
+  }
+
   //React chart
   const options: ApexOptions = {
     chart: {
@@ -40,7 +50,7 @@ const GoalCard: React.FC<GoalCardProps> = ({ className, goal }) => {
         },
         track: {
           background: 'transparent',
-          margin: 0, // margin is in pixels
+          margin: 0,
           dropShadow: {
             enabled: true,
             top: -3,
@@ -69,7 +79,12 @@ const GoalCard: React.FC<GoalCardProps> = ({ className, goal }) => {
     },
     labels: ['']
   };
-  const series: number[] = [Math.round(100 / (goal.amount / goal.balance))];
+
+  const series: number[] = [0];
+
+  if (goal.id !== 0) {
+    const series: number[] = [Math.round(100 / (goal.amount / goal.balance))];
+  }
 
   return (
     <Paper>

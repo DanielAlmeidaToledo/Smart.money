@@ -9,17 +9,30 @@ import PaperHeader from '../Paper/PaperHeader';
 
 type TransactionsProps = {
   className?: string;
-  transactions: {
+  transactions?: {
     id: number;
     title: string;
     type: string;
     category: string;
     amount: number;
-    date: Date;
+    created_at: Date;
   }[];
 };
 
 const Transactions: React.FC<TransactionsProps> = ({ className, transactions }) => {
+  if (!transactions) {
+    transactions = [
+      {
+        id: 0,
+        title: '',
+        type: '',
+        category: '',
+        amount: 0,
+        created_at: new Date()
+      }
+    ];
+  }
+
   //React chart
   const options: ApexOptions = {
     chart: {
@@ -36,7 +49,11 @@ const Transactions: React.FC<TransactionsProps> = ({ className, transactions }) 
     stroke: {
       curve: 'straight'
     },
-    labels: transactions.map((transaction) => transaction.date.toString()),
+    labels: transactions.map((transaction) => {
+      const [day, month, year] = transaction.created_at.toString().split('-');
+      const formattedDate = `${year}-${month}-${day}`;
+      return formattedDate;
+    }),
     xaxis: {
       type: 'datetime'
     },
@@ -56,7 +73,7 @@ const Transactions: React.FC<TransactionsProps> = ({ className, transactions }) 
   const series = [
     {
       name: 'Transação',
-      data: transactions.map((transaction) => transaction.amount)
+      data: transactions?.map((transaction) => Number(transaction.amount))
     }
   ];
 

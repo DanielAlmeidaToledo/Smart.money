@@ -8,12 +8,15 @@
 
 - React.JS
 - Typescript
+- React Router Dom
+- React Query
 - Sass
 - Vite
 
 ## Back-end:
 
 - Laravel
+- Laravel Telescope
 - Breeze (Laravel)
 
 ## Banco de Dados:

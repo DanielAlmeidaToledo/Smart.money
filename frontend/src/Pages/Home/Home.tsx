@@ -1,91 +1,72 @@
 import cn from 'classnames';
+import axios from '../../api/axios';
+import { useEffect, useState } from 'react';
 import useAuthContext from '../../contexts/AuthContext';
-import Cookies from 'universal-cookie';
 
 import './Home.scss';
 
-import OverallBalance from '../../components/Home/OverallBalance/OverallBalance';
 import Cards from '../../components/Home/Cards/Cards';
 import Goal from '../../components/Home/GoalCard/GoalCard';
 import Transactions from '../../components/Home/Transactions/Transactions';
+import OverallBalance from '../../components/Home/OverallBalance/OverallBalance';
 
 type HomeProps = {
   className?: string;
 };
 
-const user2 = {
-  id: 1,
-  name: 'Daniel Toledo',
-  email: 'danieltoledo.dev@gmail.com',
-  balance: 3297.98,
-  transactions: [
-    {
-      id: 1,
-      title: 'Almoço - Restaurante',
-      type: 'gasto',
-      category: 'comida',
-      amount: 350,
-      date: new Date('2023-01-05 12:00:00')
-    },
-    {
-      id: 2,
-      title: 'Salário',
-      type: 'receita',
-      category: 'salario',
-      amount: 1500.0,
-      date: new Date('2023-05-05 17:00:00')
-    },
-    {
-      id: 3,
-      title: 'Compras no shopping',
-      type: 'gasto',
-      category: 'roupas',
-      amount: 589.9,
-      date: new Date('2023-07-05 14:00:00')
-    },
-    {
-      id: 4,
-      title: 'Posto de combustível',
-      type: 'gasto',
-      category: 'roupas',
-      amount: 940.0,
-      date: new Date('2023-10-05 07:40:00')
-    }
-  ],
-  goals: [
-    {
-      id: 1,
-      title: 'Viagem para o Caribe',
-      type: 'viagem',
-      amount: 20000,
-      balance: 14600
-    },
-    {
-      id: 2,
-      title: 'Macbook Pro',
-      type: 'compra',
-      amount: 8000,
-      balance: 2000
-    }
-  ]
-};
-
-const cookies = new Cookies();
-
 const Home: React.FC<HomeProps> = ({ className }) => {
   const { user } = useAuthContext();
 
-  console.log('user ---> ', user);
+  const [goals, setGoals] = useState({
+    id: 0,
+    title: '',
+    type: '',
+    amount: 0,
+    balance: 0
+  });
+  const [transactions, setTransactions] = useState([
+    {
+      id: 0,
+      title: '',
+      type: '',
+      category: '',
+      amount: 0,
+      created_at: new Date()
+    }
+  ]);
+
+  const searchData = async () => {
+    if (user) {
+      axios.get(`/goals/${user.id}`).then((response) => {
+        setGoals(response.data[0]);
+      });
+      axios.get(`/transactions/${user.id}`).then((response) => {
+        setTransactions(response.data.data);
+      });
+    }
+  };
+
+  useEffect(() => {
+    searchData();
+  }, []);
+
+  const totalBalance = transactions.reduce((acc, transaction) => {
+    if (transaction.type === 'income') {
+      return acc + Number(transaction.amount);
+    } else {
+      return acc - Number(transaction.amount);
+    }
+  }, 0);
 
   return (
     <div className={cn('__home-container', className)}>
       <div className={cn('__home-geral')}>
-        <OverallBalance balance={user2.balance} />
+        <OverallBalance balance={totalBalance} />
         <Cards />
-        <Goal goal={user2.goals[0]} />
+        <Goal goal={goals} />
       </div>
       <div className={cn('__home-transaction')}>
-        <Transactions transactions={user2.transactions} />
+        <Transactions transactions={transactions} />
       </div>
     </div>
   );
