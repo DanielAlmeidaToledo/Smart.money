@@ -9,7 +9,6 @@
 - React.JS
 - Typescript
 - React Router Dom
-- React Query
 - Sass
 - Vite
 
