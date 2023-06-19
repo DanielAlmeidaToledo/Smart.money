@@ -36,19 +36,24 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   ]);
 
   const searchData = async () => {
-    if (user) {
-      axios.get(`/goals/${user.id}`).then((response) => {
-        setGoals(response.data[0]);
+    if (user && user.id) {
+      await axios.get(`/goals/user/${user.id}`).then((response) => {
+        if (response.data) {
+          setGoals(response.data[0]);
+        }
       });
-      axios.get(`/transactions/${user.id}`).then((response) => {
-        setTransactions(response.data.data);
+      await axios.get(`/transactions/user/${user.id}`).then((response) => {
+        setTransactions(response.data);
       });
     }
   };
 
   useEffect(() => {
+    if (user && !user.id) {
+      return;
+    }
     searchData();
-  }, []);
+  }, [user]);
 
   const totalBalance = transactions.reduce((acc, transaction) => {
     if (transaction.type === 'income') {

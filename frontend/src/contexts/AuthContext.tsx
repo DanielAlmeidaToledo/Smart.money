@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
   // Verifica se o usuário está logado
   useEffect(() => {
+
     const userCookie = cookies.get('user');
     if (userCookie) {
       setUser(userCookie);
