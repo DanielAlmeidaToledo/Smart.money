@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { useState } from 'react';
 import axios from '../../../api/axios';
+import Alert from '@mui/material/Alert';
 import useAuthContext from '../../../contexts/AuthContext';
 
 import './TransactionModal.scss';
@@ -37,6 +38,7 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
         console.log(response);
         onClose();
         searchTransactions();
+        return <Alert severity="success">Transação adicionada com sucesso!</Alert>;
       })
       .catch((error) => {
         console.log(error);

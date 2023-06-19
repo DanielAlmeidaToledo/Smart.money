@@ -42,6 +42,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
     searchTransactions();
   }, [user?.id]);
 
+  // Realiza a busca das transações do usuário
   const searchTransactions = () => {
     axios
       .get(`/transactions/user/${user.id}`)
@@ -82,7 +83,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
               <img src={SearchIcon} alt="Pesquisar" />
               <input type="text" placeholder="Pesquisar" />
             </div>
-            <div>
+            {/* <div>
               <img src={CardIcon} alt="Filtrar" />
               <select name="type" id="type">
                 <option value="all">Selecione</option>
@@ -91,7 +92,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
                 <option value="itau">Itaú</option>
                 <option value="bradesco">Bradesco</option>
               </select>
-            </div>
+            </div> */}
           </div>
           <button
             className={cn(className, 'button-add-transaction', 'Button')}

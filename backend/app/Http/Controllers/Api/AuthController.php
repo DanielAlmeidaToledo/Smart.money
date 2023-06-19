@@ -39,6 +39,6 @@ class AuthController extends Controller
         // $request->user()->tokens()->delete();
 
         // Remove o cookie 'user_auth'
-        return cookie(Cookie::forget('user_auth'));
+        return response('Logout realizado')->cookie(Cookie::forget('user_auth'));
     }
 }
