@@ -46,6 +46,17 @@
   }
 }
 
+@mixin buttonDelete {
+  @include buttonSubmit;
+  color: getColor('error');
+  border: 1px solid getColor('error');
+  background-color: transparent;
+
+  &:hover {
+      box-shadow: 0px 0px 10px getColor('error');
+  }
+}
+
 @mixin contentContainer {
   height: 100%;
   width: 95%;

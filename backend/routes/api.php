@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\TransactionController;
 
 # Rotas para autenticação
 Route::post('/login', [AuthController::class, 'auth']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
 # Rotas para o CRUD de usuários

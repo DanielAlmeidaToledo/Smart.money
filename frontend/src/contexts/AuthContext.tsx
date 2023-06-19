@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       });
       cookies.remove('user');
       setErrors([]);
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.error(error);
     }
