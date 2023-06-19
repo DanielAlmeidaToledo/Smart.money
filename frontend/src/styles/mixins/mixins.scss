@@ -46,6 +46,18 @@
   }
 }
 
+@mixin buttonAdd {
+  @include buttonOrInput;
+  border: 1px solid getColor('primary');
+  background-color: getColor('primary');
+  cursor: pointer;
+
+  &:hover {
+      transition: .2s;
+      box-shadow: 0px 0px 10px getColor('primary');
+  }            
+}
+
 @mixin buttonDelete {
   @include buttonSubmit;
   color: getColor('error');
