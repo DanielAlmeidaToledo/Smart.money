@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import ReactApexChart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
+import moment from 'moment';
 
 import './Transactions.scss';
 
@@ -51,8 +52,9 @@ const Transactions: React.FC<TransactionsProps> = ({ className, transactions }) 
     },
     labels: transactions.map((transaction) => {
       const [day, month, year] = transaction.created_at.toString().split('-');
-      const formattedDate = `${year}-${month}-${day}`;
-      return formattedDate;
+      const date = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+      const formattedDate = date.isValid() ? date.format('YYYY-MM-DD') : '';
+      return date.isValid() ? formattedDate : '2023-01-01';
     }),
     xaxis: {
       type: 'datetime'
