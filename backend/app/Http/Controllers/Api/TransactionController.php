@@ -24,7 +24,7 @@ class TransactionController extends Controller
         return new TransactionResource($transaction);
     }
 
-    public function showTransactionForId(string $user_id)
+    public function showTransactionForUser(string $user_id)
     {
         $transactions = Transaction::select('id', 'user_id', 'title', 'type', 'category', 'amount', 'created_at')
             ->where('user_id', $user_id)

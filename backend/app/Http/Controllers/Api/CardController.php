@@ -24,6 +24,21 @@ class CardController extends Controller
         return new CardResource($card);
     }
 
+    public function showCardForUser(string $user_id)
+    {
+        $cards = Card::select('id', 'user_id', 'card_name', 'bank', 'created_at')
+            ->where('user_id', $user_id)
+            ->get();
+
+        $cardResources = [];
+
+        foreach ($cards as $card) {
+            $cardResources[] = new CardResource($card);
+        }
+
+        return $cardResources;
+    }
+
     public function createCard(CardRequest $request)
     {
         $data = [
