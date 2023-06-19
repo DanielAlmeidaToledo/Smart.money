@@ -24,6 +24,21 @@ class GoalController extends Controller
         return new GoalResource($goal);
     }
 
+    public function showGoalForUser(string $user_id)
+    {
+        $goals = Goal::select('id', 'user_id', 'title', 'type', 'amount', 'balance', 'created_at')
+            ->where('user_id', $user_id)
+            ->get();
+
+        $goalResources = [];
+
+        foreach ($goals as $goal) {
+            $goalResources[] = new GoalResource($goal);
+        }
+
+        return $goalResources;
+    }
+
     public function createGoal(GoalRequest $request)
     {
         $data = [
