@@ -18,9 +18,9 @@ class CardController extends Controller
 
     public function showCard(string $id)
     {
-        $card = Card::select('id', 'user_id', 'card_name', 'bank')
+        $card = Card::select('id', 'user_id', 'card_name', 'bank', 'created_at')
             ->where('id', $id)
-            ->findOrFail();
+            ->firstOrFail();
         return new CardResource($card);
     }
 

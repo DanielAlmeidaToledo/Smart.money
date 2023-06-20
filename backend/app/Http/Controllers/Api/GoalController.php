@@ -20,7 +20,7 @@ class GoalController extends Controller
     {
         $goal = Goal::select('id', 'user_id', 'title', 'type', 'amount', 'balance', 'created_at')
             ->where('id', $id)
-            ->findOrFail();
+            ->firstOrFail();
         return new GoalResource($goal);
     }
 
