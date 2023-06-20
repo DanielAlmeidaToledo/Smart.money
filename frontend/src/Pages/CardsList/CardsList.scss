@@ -1,0 +1,85 @@
+@import '../../styles/abstracts/colors';
+
+.__cardslist-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+
+  &.__development-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    &.__title {
+      font-size: 7rem;
+      font-weight: bold;
+      margin-bottom: 5rem;
+    }
+
+    &.__clock-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 16px;
+    }
+  }
+}
+
+.bg {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: getColor('sidebar-background');
+  box-shadow: getColor('box-shadow');
+
+  position: relative;
+  display: flex;
+  align-items: space-around;
+  justify-content: center;
+
+  &::before,
+  &::after {
+    margin-top: 5rem;
+    content: '';
+    background-color: getColor('text-on-primary');
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+  }
+
+  &::before {
+    left: 36%;
+    top: 36%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-image: radial-gradient(circle 8px at 18px 18px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 18px 0px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 0px 18px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 36px 18px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 18px 36px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 30px 30px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 5px 30px, getColor('background') 100%, transparent 0), radial-gradient(circle 4px at 5px 5px, getColor('background') 100%, transparent 0);
+    animation: rotationBack 3s linear infinite;
+  }
+
+  &::after {
+    content: '';
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-image: radial-gradient(circle 5px at 12px 12px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 12px 0px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 0px 12px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 24px 12px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 12px 24px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 20px 20px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 3px 20px, getColor('background') 100%, transparent 0), radial-gradient(circle 2.5px at 3px 3px, getColor('background') 100%, transparent 0);
+    animation: rotationBack 4s linear infinite reverse;
+  }
+}
+
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
