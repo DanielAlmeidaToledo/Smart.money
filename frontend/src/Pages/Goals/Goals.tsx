@@ -72,6 +72,16 @@ const Goals: React.FC<GoalsProps> = ({ className }) => {
     setIsOpenAddSaldo(false);
   };
 
+  // Modal de editar meta
+  const openEditModal = async (goal: any) => {
+    await setSelectedGoal(goal);
+    setIsOpenEdit(!isOpenEdit);
+  };
+
+  const closeEditModal = () => {
+    setIsOpenEdit(false);
+  };
+
   return (
     <div className={cn('__goals-container', className)}>
       <h2>Metas</h2>

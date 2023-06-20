@@ -80,11 +80,7 @@ const GoalCard: React.FC<GoalCardProps> = ({ className, goal }) => {
     labels: ['']
   };
 
-  const series: number[] = [0];
-
-  if (goal.id !== 0) {
-    const series: number[] = [Math.round(100 / (goal.amount / goal.balance))];
-  }
+  const series: number[] = [goal.title !== '' ? Math.round((goal.balance / goal.amount) * 100) : 0];
 
   return (
     <Paper>
