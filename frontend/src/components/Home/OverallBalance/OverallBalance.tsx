@@ -23,11 +23,8 @@ const OverallBalance: React.FC<OverallBalanceProps> = ({ className, balance }) =
           <span className="material-symbols-outlined">update</span>
         </button>
       </PaperHeader>
-      <div className={cn('__overall-balance-content', className)}>
-        {balance?.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        })}
+      <div className={cn('__overall-balance-content', className)} style={{ color: balance && balance < 0 ? '#ff5050' : '#1CA477' }}>
+        {balance !== undefined ? balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : ''}
       </div>
       <div className={cn('__overall-balance-footer')}>
         <span>
