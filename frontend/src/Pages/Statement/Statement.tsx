@@ -109,18 +109,22 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
           )}
         </div>
         <div className={cn('__statement-table')}>
-          <table>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Valor</th>
-                <th>Data</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions ? (
-                transactions.map((transaction) => {
+          {transactions.length === 0 ? (
+            <div className={cn('__statement-empty')}>
+              <h3>Nenhuma transação encontrada :(</h3>
+            </div>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Valor</th>
+                  <th>Data</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((transaction) => {
                   const { id, title, type, category, amount, created_at } = transaction;
                   return (
                     <tr key={id}>
@@ -162,16 +166,10 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
                       </td>
                     </tr>
                   );
-                })
-              ) : (
-                <tr>
-                  <td colSpan={4} className="td-empty">
-                    Nenhuma transação encontrada.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                })}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
       {isOpenEdit && (

@@ -85,6 +85,17 @@
                     }
                 }
             }
+            .__statement-empty {
+                height: 100%;
+                text-align: center;
+                padding: 14rem 0;
+
+                h3 {
+                    font-size: 2.4rem;
+                    font-weight: 500;
+                    margin: 2rem 0;
+                }
+            }
         }
     }
 }

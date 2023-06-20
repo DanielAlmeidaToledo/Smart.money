@@ -2,20 +2,18 @@
 @import '../../../styles/mixins/mixins';
 @import '../../../styles/mixins/breakpoints';
 
-.__transaction-edit-container {
+.__goal-modal-container {
     @include modalContainer;
-    @include allCenter;
 
-    .__transaction-edit-content {
+    .__goal-modal-content {
         @include modalContent;
 
-        .__transaction-edit-header {
+        .__goal-modal-header {
             width: 100%;
             height: 5rem;
-            gap: 10rem;
+            gap: 25rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
 
             h2 {
                 @include allCenter;
@@ -36,7 +34,7 @@
             }
         }
 
-        .__transaction-edit-body {
+        .__goal-modal-body {
             width: 100%;
             margin-top: 2rem;
 
@@ -44,7 +42,7 @@
                 width: 100%;
             }
 
-            .__transaction-edit-body-input {
+            .__goal-modal-body-input {
                 display: block;
                 margin: 1.5rem 0;
 
@@ -66,7 +64,11 @@
                 }
             }
 
-            .__transaction-edit-body-div {
+            .__goal-modal-body-select {
+                margin-top: 2.5rem;
+            }
+
+            .__goal-modal-body-div {
                 display: flex;
                 justify-content: space-between;
                 
@@ -75,12 +77,11 @@
                 }
             }
 
-            .__transaction-edit-body-buttons {
+            .__goal-modal-body-buttons {
                 width: 100%;
                 margin-top: 1.6rem;
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
 
                 button {
                     @include buttonSubmit;
@@ -88,10 +89,12 @@
                     margin: 1rem 0;
                 }
 
-                .button-delete {
-                    @include buttonDelete;
+                :nth-child(1) {
+                    @include buttonOrInput;
                     width: 48%;
-                    margin: 1rem 0;
+                    margin: 0;
+                    border: 1px solid getColor('primary');
+                    color: getColor('primary');
                 }
             }
         }
