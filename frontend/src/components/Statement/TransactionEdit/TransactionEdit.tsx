@@ -27,10 +27,10 @@ const TransactionEdit: React.FC<TransactionEditProps> = ({
   const handleUpdate = () => {
     axios
       .patch(`/transactions/${selectedTransaction.id}`, {
-        title,
-        type,
-        amount,
-        category
+        title: title,
+        type: type,
+        amount: amount,
+        category: category
       })
       .then((response) => {
         onClose();
