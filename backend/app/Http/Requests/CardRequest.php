@@ -35,6 +35,12 @@ class CardRequest extends FormRequest
                 'nullable',
                 'exists:users,id',
             ];
+
+            $rules['card_name'] = [
+                'nullable',
+                'string',
+                'max:255',
+            ];
         }
 
         return $rules;
