@@ -51,6 +51,18 @@ class GoalRequest extends FormRequest
                 'string',
                 'max:255',
             ];
+
+            $rules['type'] = [
+                'nullable',
+                'string',
+                'max:255',
+            ];
+
+            $rules['amount'] = [
+                'nullable',
+                'numeric',
+                'min:0',
+            ];
         }
 
         return $rules;
