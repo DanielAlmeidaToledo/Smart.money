@@ -31,6 +31,10 @@
                 border: 1px solid getColor('primary');
             }
         }
+
+        .__settings-name {
+            text-transform: uppercase;
+        }
     }
 
     .__settings-container_form_buttons {

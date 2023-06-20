@@ -95,7 +95,7 @@ const Goals: React.FC<GoalsProps> = ({ className }) => {
         <div className={cn('__goals-table')}>
           {goals.length === 0 ? (
             <div className={cn('__goals-empty')}>
-              <h3>Nenhuma meta encontrada :(</h3>
+              <h3>Você ainda não possui metas!</h3>
             </div>
           ) : (
             <table>

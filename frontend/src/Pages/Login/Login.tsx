@@ -56,6 +56,7 @@ const Login: React.FC<LoginProps> = ({ className }) => {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="off"
                 required
               />
             </div>
@@ -66,6 +67,7 @@ const Login: React.FC<LoginProps> = ({ className }) => {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="off"
                 required
               />
               <p>Esqueci minha senha</p>

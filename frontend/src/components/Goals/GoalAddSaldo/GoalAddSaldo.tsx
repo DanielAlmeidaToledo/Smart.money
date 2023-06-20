@@ -27,8 +27,7 @@ const GoalAddSaldo: React.FC<GoalAddSaldoProps> = ({
 
     axios
       .patch(`/goals/${selectedGoal.id}`, {
-        user_id: user?.id,
-        balance: balance
+        balance: Number(selectedGoal.balance) + balance
       })
       .then((response) => {
         onClose();
