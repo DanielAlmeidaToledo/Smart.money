@@ -11,23 +11,28 @@ type SettingsProps = {
 };
 
 const Settings: React.FC<SettingsProps> = ({ className }) => {
+  const { user, logout } = useAuthContext();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassowrd] = useState('');
-  const { user, logout } = useAuthContext();
 
   // Salva os dados do usuário
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const response = await axios.patch('/users', {
-        name: name,
-        email: email,
-        password: password
-      });
-
-      console.log(response);
+      if (password !== '') {
+        await axios.patch(`/users/${user?.id}`, {
+          name: name !== '' ? name : user?.name,
+          email: email !== '' ? email : user?.email,
+          password: password
+        });
+      } else {
+        await axios.patch(`/users/${user?.id}`, {
+          name: name !== '' ? name : user?.name,
+          email: email !== '' ? email : user?.email
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -54,6 +59,7 @@ const Settings: React.FC<SettingsProps> = ({ className }) => {
             type="text"
             name="name"
             id="name"
+            className="__settings-name"
             minLength={2}
             defaultValue={user && user.name}
             onChange={(e) => setName(e.target.value)}

@@ -111,7 +111,7 @@ const Statement: React.FC<StatementProps> = ({ className }) => {
         <div className={cn('__statement-table')}>
           {transactions.length === 0 ? (
             <div className={cn('__statement-empty')}>
-              <h3>Nenhuma transação encontrada :(</h3>
+              <h3>Você ainda não possui transações!</h3>
             </div>
           ) : (
             <table>

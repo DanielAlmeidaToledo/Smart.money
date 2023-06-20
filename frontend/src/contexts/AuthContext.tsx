@@ -67,7 +67,10 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const register = async ({ ...data }) => {
     try {
       const response = await axios.post('/users', data);
-      setUser(response.data.data);
+      const { id, name, email, created_at } = response.data.data;
+      setUser({ id, name, email, created_at });
+      setErrors([]);
+      cookies.set('user', { id, name, email, created_at });
       navigate('/dashboard');
     } catch (e: any) {
       if (e.response && e.response.status === 422) {
