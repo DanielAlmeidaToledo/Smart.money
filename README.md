@@ -21,3 +21,38 @@
 ## Banco de Dados:
 
 - MySQL
+
+## Como rodar esse projeto:
+
+- Abrir terminal do Ubuntu (WSL)
+
+- Clonar esse repositório
+```
+git clone https://github.com/DanielAlmeidaToledo/Smart.money.git
+```
+
+- Entrar na pasta do projeto
+```
+cd Smart.money
+```
+
+- Suba os containers do projeto
+```sh
+docker-compose up -d
+```
+
+- Acessar o container
+```sh
+docker-compose exec app bash
+```
+
+- Instalar as dependências do projeto
+```sh
+composer install
+```
+
+
+- Gerar a key do projeto Laravel
+```sh
+php artisan key:generate
+```
