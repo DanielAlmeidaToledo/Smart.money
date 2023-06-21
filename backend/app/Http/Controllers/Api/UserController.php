@@ -7,6 +7,8 @@ use Ramsey\Uuid\Uuid;
 use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUpdateUserRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class UserController extends Controller
 {
@@ -53,7 +55,11 @@ class UserController extends Controller
 
     public function deleteUser(string $id)
     {
-        User::findOrFail($id)->delete();
+        Schema::disableForeignKeyConstraints();
+        DB::transaction(function () use ($id) {
+            User::findOrFail($id)->delete();
+        });
+        Schema::enableForeignKeyConstraints();
 
         return response()->json([
             'message' => 'User deleted successfully'
