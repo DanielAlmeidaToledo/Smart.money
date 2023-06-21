@@ -3,6 +3,7 @@ import cn from 'classnames';
 import axios from '../../api/axios';
 import useAuthContext from '../../contexts/AuthContext';
 
+import GoalEdit from '../../components/Goals/GoalEdit/GoalEdit';
 import GoalModal from '../../components/Goals/GoalModal/GoalModal';
 import GoalAddSaldo from '../../components/Goals/GoalAddSaldo/GoalAddSaldo';
 
@@ -159,7 +160,9 @@ const Goals: React.FC<GoalsProps> = ({ className }) => {
                         </button>
                       </td>
                       <td>
-                        <button className="button-detail">Detalhes</button>
+                        <button className="button-detail" onClick={() => openEditModal(goal)}>
+                          Detalhes
+                        </button>
                       </td>
                     </tr>
                   );
@@ -172,6 +175,14 @@ const Goals: React.FC<GoalsProps> = ({ className }) => {
       {isOpenAddSaldo && (
         <GoalAddSaldo
           onClose={closeAddSaldoModal}
+          searchGoals={searchGoals}
+          selectedGoal={selectedGoal}
+          className={cn(className, 'goal-modal')}
+        />
+      )}
+      {isOpenEdit && (
+        <GoalEdit
+          onClose={closeEditModal}
           searchGoals={searchGoals}
           selectedGoal={selectedGoal}
           className={cn(className, 'goal-modal')}
