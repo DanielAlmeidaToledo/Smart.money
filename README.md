@@ -4,26 +4,6 @@
   <img src="https://github.com/DanielAlmeidaToledo/Smart.money/assets/96501443/a8cce6c7-4637-4e48-b9cd-a54ef62dd3f9" alt="Smart.money width="180" height="180"/>
 </p>
 
-## Front-end:
-
-- React.JS
-- Typescript
-- React Router Dom
-- Sass
-- Mui
-- Vite
-
-## Back-end:
-
-- Laravel
-- Laravel Telescope
-- Breeze (Laravel)
-- PHP
-
-## Banco de Dados:
-
-- MySQL
-
 ## Como rodar esse projeto:
 
 A seguir estão as etapas necessárias para executar o projeto em sua máquina. Certifique-se de seguir todas as instruções na ordem correta.
@@ -169,3 +149,22 @@ O banco de dados pode ser visualizado usando o phpMyAdmin:
 
 Certifique-se de que todos os passos foram seguidos corretamente para evitar problemas durante a execução do projeto.
 
+## Front-end:
+
+- React.JS
+- Typescript
+- React Router Dom
+- Sass
+- Mui
+- Vite
+
+## Back-end:
+
+- Laravel
+- Laravel Telescope
+- Breeze (Laravel)
+- PHP
+
+## Banco de Dados:
+
+- MySQL
