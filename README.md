@@ -55,7 +55,7 @@ A seguir estão as etapas necessárias para executar o projeto em sua máquina. 
 
 4. Instale o Ubuntu na Microsoft Store:
    - Procure por "Ubuntu" na Microsoft Store.
-   - Selecione o Ubuntu desejado (por exemplo, Ubuntu 20.04 LTS) e clique em "Instalar".
+   - Selecione o Ubuntu e clique em "Instalar".
    - Siga as instruções na tela para concluir a instalação.
 
 5. Instale o Windows Terminal:
@@ -84,6 +84,10 @@ A seguir estão as etapas necessárias para executar o projeto em sua máquina. 
 8. Instale o Docker:
    - Faça o download do instalador do Docker para Windows em: https://docs.docker.com/docker-for-windows/install/.
    - Execute o instalador baixado e siga as instruções na tela para concluir a instalação do Docker em seu sistema.
+   - Após instalado acesse Configurações > Resources > WSL Integration e habilite o Ubuntu.
+     
+   - ![image](https://github.com/DanielAlmeidaToledo/Smart.money/assets/96501443/ea6d3707-6b31-4410-a02b-03338c41e7ff)
+
 
 ### Configuração do projeto
 
