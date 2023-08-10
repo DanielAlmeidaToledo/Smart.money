@@ -8,10 +8,9 @@ type AuthProps = {
 };
 
 type User = {
-  id: string;
-  name: string;
+  name?: string;
   email: string;
-  created_at: string;
+  password: string;
 };
 
 type AuthContextType = {
@@ -30,10 +29,9 @@ const cookies = new Cookies();
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const [user, setUser] = useState<User>({
-    id: '',
     name: '',
     email: '',
-    created_at: ''
+    password: ''
   });
   const [errors, setErrors] = useState<any[]>([]);
   const navigate = useNavigate();
@@ -51,10 +49,10 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const login = async ({ ...data }) => {
     try {
       const response = await axios.post('/login', data);
-      const { id, name, email, created_at } = response.data;
-      setUser({ id, name, email, created_at });
+      const { email, password } = response.data;
+      setUser({ email, password });
       setErrors([]);
-      cookies.set('user', { id, name, email, created_at });
+      cookies.set('user', { email, password });
       navigate('/dashboard');
     } catch (e: any) {
       if (e.response && e.response.status === 422) {
@@ -66,11 +64,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
   // Função para fazer cadastro
   const register = async ({ ...data }) => {
     try {
-      const response = await axios.post('/users', data);
-      const { id, name, email, created_at } = response.data.data;
-      setUser({ id, name, email, created_at });
+      const response = await axios.post('/user', data);
+      const { name, email, password } = response.data;
+      setUser({ name, email, password });
       setErrors([]);
-      cookies.set('user', { id, name, email, created_at });
+      cookies.set('user', { name, email, password });
       navigate('/dashboard');
     } catch (e: any) {
       if (e.response && e.response.status === 422) {
@@ -85,10 +83,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
     try {
       await axios.post('/logout');
       setUser({
-        id: '',
         name: '',
         email: '',
-        created_at: ''
+        password: ''
       });
       cookies.remove('user');
       setErrors([]);
